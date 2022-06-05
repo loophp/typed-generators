@@ -30,7 +30,6 @@
         "php": ">= 7.4"
     },
     "require-dev": {
-        "ext-pcov": "*",
         "drupol/php-conventions": "^5",
         "fakerphp/faker": "^1.19",
         "infection/infection": "^0.26",
