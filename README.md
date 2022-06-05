@@ -13,13 +13,13 @@
 
 ## Description
 
-Typed Generators
+Generate random values of specific types and in any shape.
 
 ## Features
 
 ## Installation
 
-```composer require loophp/generators```
+```composer require loophp/typed-generators```
 
 ## Usage
 
@@ -43,7 +43,7 @@ $value = Value::new(
 );
 
 foreach ($value as $v) {
-    var_dump($v); // Random string generated
+    var_dump($v);     // Random string generated
 }
 ```
 
@@ -68,7 +68,7 @@ $keyValue = KeyValue::new(
 );
 
 foreach ($keyValue as $k => $v) {
-    var_dump($k, $v); // Random string for key, random boolean for value.
+    var_dump($k, $v);  // Random string for key, random boolean for value.
 }
 ```
 
@@ -105,6 +105,8 @@ foreach ($keyValue as $k => $v) {
 
 ### Use random compound values
 
+Compound values are values that can be either of type `A` or type `B`.
+
 ```php
 <?php
 
@@ -128,10 +130,10 @@ $fakerType = FakerType::new(
 );
 
 $keyValue = KeyValue::new(
-    BoolType::new(),   // A random boolean for keys.
-    Compound::new(     // A random compound value for values which can
-        $fakerType,    // be either a firstname or an integer.
-        IntType::new()
+    BoolType::new(),    // A random boolean for keys.
+    Compound::new(      // A random compound value for values which can be
+        $fakerType,     // either a firstname
+        IntType::new()  // either an integer.
     )
 );
 
@@ -140,15 +142,10 @@ foreach ($keyValue as $k => $v) {
 }
 ```
 
-### Generate a complex array
+### Generate a complex typed array shape
 
 ```php
 <?php
-
-/**
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
 
 declare(strict_types=1);
 
