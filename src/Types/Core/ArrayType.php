@@ -11,6 +11,8 @@ namespace loophp\generators\Types\Core;
 
 use loophp\generators\Types\TypeGenerator;
 
+use function count;
+
 /**
  * @template TKey
  * @template T
@@ -19,6 +21,8 @@ use loophp\generators\Types\TypeGenerator;
  */
 final class ArrayType implements TypeGenerator
 {
+    private int $count;
+
     /**
      * @var TypeGenerator<TKey>
      */
@@ -28,8 +32,6 @@ final class ArrayType implements TypeGenerator
      * @var TypeGenerator<T>
      */
     private TypeGenerator $value;
-
-    private int $count;
 
     /**
      * @param TypeGenerator<TKey> $k
