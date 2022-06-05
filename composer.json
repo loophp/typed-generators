@@ -1,0 +1,69 @@
+{
+    "name": "loophp/generators",
+    "description": "TODO",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "generators"
+    ],
+    "readme": "README.md",
+    "authors": [
+        {
+            "name": "Pol Dellaiera",
+            "email": "pol.dellaiera@protonmail.com",
+            "homepage": "https://not-a-number.io",
+            "role": "author"
+        }
+    ],
+    "homepage": "https://github.com/loophp/generators",
+    "support": {
+        "issues": "https://github.com/loophp/generators/issues",
+        "source": "https://github.com/loophp/generators"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/drupol"
+        }
+    ],
+    "require": {
+        "php": ">= 7.4"
+    },
+    "require-dev": {
+        "drupol/php-conventions": "^5",
+        "fakerphp/faker": "^1.19",
+        "infection/infection": "^0.26",
+        "phpbench/phpbench": "^1.2",
+        "phpstan/phpstan-strict-rules": "^1.0",
+        "phpunit/php-code-coverage": "^9.2",
+        "phpunit/phpunit": "^9.5",
+        "symfony/var-dumper": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "loophp\\generators\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "benchmarks\\loophp\\generators\\": "./tests/benchmarks/",
+            "tests\\loophp\\generators\\": "./tests/unit/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true,
+            "phpro/grumphp": true,
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
+        "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
+        "grumphp": "./vendor/bin/grumphp run",
+        "infection": "vendor/bin/infection run -j 2"
+    }
+}
