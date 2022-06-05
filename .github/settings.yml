@@ -60,7 +60,7 @@ repository:
     allow_rebase_merge: true
     allow_squash_merge: true
     default_branch: main
-    description: "TODO."
+    description: "Generate random typed values and in any shape."
     topics: generators
     has_downloads: true
     has_issues: true
