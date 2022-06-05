@@ -9,6 +9,7 @@
         <directory name="./tests/static-analysis" />
         <ignoreFiles>
             <directory name="vendor" />
+            <directory name="tests/unit" />
         </ignoreFiles>
     </projectFiles>
 </psalm>

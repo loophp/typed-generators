@@ -12,7 +12,7 @@ use loophp\generators\Generator\KeyValue;
 use loophp\generators\Types\Core\StringType;
 use loophp\generators\Types\Hybrid\FakerType;
 
-include __DIR__ . '/../../vendor/autoload.php';
+include __DIR__ . '/../../../vendor/autoload.php';
 
 /**
  * @param iterable<string, string> $iterable
