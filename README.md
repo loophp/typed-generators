@@ -140,6 +140,73 @@ foreach ($keyValue as $k => $v) {
 }
 ```
 
+### Generate a complex array
+
+```php
+<?php
+
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Snippet;
+
+use Faker\Generator;
+use loophp\generators\Types\Core\ArrayType;
+use loophp\generators\Types\Core\BoolType;
+use loophp\generators\Types\Core\StringType;
+use loophp\generators\Types\Hybrid\Compound;
+use loophp\generators\Types\Hybrid\FakerType;
+
+include __DIR__ . '/vendor/autoload.php';
+
+$complexArray = ArrayType::new(
+    StringType::new(),
+    ArrayType::new(
+        StringType::new(),
+        Compound::new(
+            BoolType::new(),
+            FakerType::new(
+                StringType::new(),
+                static function (Generator $faker): string {
+                    return $faker->city();
+                }
+            )
+        ),
+        6
+    ),
+    2
+);
+
+var_dump($complexArray());
+
+/** @psalm-trace $complexArray */
+
+/*
+array:2 [
+  "*" => array:6 [
+    "X" => true
+    """ => true
+    "p" => false
+    "{" => false
+    "#" => "West Shyann"
+    9 => "Amaliamouth"
+  ]
+  "s" => array:6 [
+    "k" => "Port Nikkistad"
+    "F" => "Beahanstad"
+    "Q" => "New Skylarton"
+    "i" => true
+    ":" => "Harrisberg"
+    "|" => "Port Nathenmouth"
+  ]
+]
+*/
+```
+
 ## Code quality, tests, benchmarks
 
 Every time changes are introduced into the library, [Github][2] runs the

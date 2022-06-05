@@ -12,30 +12,71 @@ namespace loophp\generators\Types\Core;
 use loophp\generators\Types\TypeGenerator;
 
 /**
- * @implements TypeGenerator<array>
+ * @template TKey
+ * @template T
+ *
+ * @implements TypeGenerator<array<TKey, T>>
  */
 final class ArrayType implements TypeGenerator
 {
     /**
-     * @return array<array-key, mixed>
+     * @var TypeGenerator<TKey>
      */
-    public function __invoke(): array
+    private TypeGenerator $key;
+
+    /**
+     * @var TypeGenerator<T>
+     */
+    private TypeGenerator $value;
+
+    private int $count;
+
+    /**
+     * @param TypeGenerator<TKey> $k
+     * @param TypeGenerator<T> $v
+     */
+    public function __construct(TypeGenerator $k, TypeGenerator $v, int $count = 1)
     {
-        return [];
+        $this->key = $k;
+        $this->value = $v;
+        $this->count = $count;
     }
 
     /**
-     * @param array<array-key, mixed> $input
+     * @return array<TKey, T>
+     */
+    public function __invoke(): array
+    {
+        $return = [];
+
+        while (count($return) < $this->count) {
+            $return[($this->key)()] = ($this->value)();
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param array<TKey, T> $input
      *
-     * @return array<array-key, mixed>
+     * @return array<TKey, T>
      */
     public function identity($input): array
     {
         return $input;
     }
 
-    public static function new(): self
+    /**
+     * @template WKey
+     * @template W
+     *
+     * @param TypeGenerator<WKey> $k
+     * @param TypeGenerator<W> $v
+     *
+     * @return ArrayType<WKey, W>
+     */
+    public static function new(TypeGenerator $k, TypeGenerator $v, int $count = 1): self
     {
-        return new self();
+        return new self($k, $v, $count);
     }
 }
