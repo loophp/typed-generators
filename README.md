@@ -204,7 +204,25 @@ array:2 [
     "|" => "Port Nathenmouth"
   ]
 ]
-*/
+
+./vendor/bin/phpstan analyse --level=9 test-gen.php
+
+ 1/1 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ ------ --------------------------------------------------------
+  Line   test-gen.php
+ ------ --------------------------------------------------------
+  39     Dumped type: array<string, array<string, bool|string>>
+ ------ --------------------------------------------------------
+
+$ ./vendor/bin/psalm --show-info=true --stats --no-cache test-gen.php
+Target PHP version: 7.4 (inferred from composer.json)
+Scanning files...
+Analyzing files...
+
+I
+
+INFO: Trace - test-gen.php:41:0 - $complexArray: loophp\generators\Types\TypeGenerator<array<string, array<string, bool|string>>> (see https://psalm.dev/224)
 ```
 
 ## Code quality, tests, benchmarks
