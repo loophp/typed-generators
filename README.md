@@ -93,7 +93,7 @@ $fakerType = FakerType::new(
     fn (Generator $faker): string => $faker->city()
 );
 
-$keyValue = KeyValue::of(
+$keyValue = KeyValue::new(
     StringType::new(4), // A random string of length 4
     $fakerType          // A random city name
 );

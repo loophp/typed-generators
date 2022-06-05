@@ -43,17 +43,6 @@ final class Compound implements TypeGenerator
     }
 
     /**
-     * @param TypeGenerator<T> $t1
-     * @param TypeGenerator<U> $t2
-     *
-     * @return Compound<T, U>
-     */
-    public static function new(TypeGenerator $t1, TypeGenerator $t2): self
-    {
-        return new self($t1, $t2);
-    }
-
-    /**
      * @return T|U
      */
     public function __invoke()
@@ -69,5 +58,19 @@ final class Compound implements TypeGenerator
     public function identity($input)
     {
         return $input;
+    }
+
+    /**
+     * @template V
+     * @template W
+     *
+     * @param TypeGenerator<V> $t1
+     * @param TypeGenerator<W> $t2
+     *
+     * @return Compound<V, W>
+     */
+    public static function new(TypeGenerator $t1, TypeGenerator $t2): self
+    {
+        return new self($t1, $t2);
     }
 }

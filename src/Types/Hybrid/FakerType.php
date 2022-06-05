@@ -45,17 +45,6 @@ final class FakerType implements TypeGenerator
     }
 
     /**
-     * @param TypeGenerator<T> $t
-     * @param Closure(Generator): T $fakerGenerator
-     *
-     * @return FakerType<T>
-     */
-    public static function new(TypeGenerator $t, Closure $fakerGenerator, ?Generator $faker = null): self
-    {
-        return new self($t, $fakerGenerator, $faker);
-    }
-
-    /**
      * @return T
      */
     public function __invoke()
@@ -71,5 +60,18 @@ final class FakerType implements TypeGenerator
     public function identity($input)
     {
         return $this->type->identity($input);
+    }
+
+    /**
+     * @template V
+     *
+     * @param TypeGenerator<V> $t
+     * @param Closure(Generator): V $fakerGenerator
+     *
+     * @return FakerType<V>
+     */
+    public static function new(TypeGenerator $t, Closure $fakerGenerator, ?Generator $faker = null): self
+    {
+        return new self($t, $fakerGenerator, $faker);
     }
 }

@@ -21,11 +21,11 @@ function foobar(iterable $iterable): void
 {
 }
 
-$fakerType = new FakerType(
-    new StringType(),
+$fakerType = FakerType::new(
+    StringType::new(),
     static function (Generator $faker): string {
         return $faker->city();
     }
 );
 
-foobar(KeyValue::of(StringType::new(), $fakerType));
+foobar(KeyValue::new(StringType::new(), $fakerType));
