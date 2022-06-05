@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace loophp\generators\Types\Hybrid;
+namespace loophp\TypedGenerators\Types\Hybrid;
 
 use Closure;
 use Faker\Factory;
 use Faker\Generator;
-use loophp\generators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
  * @template T

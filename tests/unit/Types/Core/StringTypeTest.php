@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace tests\loophp\generators\Types\Core;
+namespace tests\loophp\TypedGenerators\Types\Core;
 
-use loophp\generators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Core\StringType;
 use PHPUnit\Framework\TestCase;
 use function ord;
 use function strlen;
 
 /**
  * @internal
- * @coversDefaultClass \loophp\generators
+ * @coversDefaultClass \loophp\TypedGenerators
  */
 final class StringTypeTest extends TestCase
 {

@@ -8,9 +8,9 @@
 declare(strict_types=1);
 
 use Faker\Generator;
-use loophp\generators\Generator\KeyValue;
-use loophp\generators\Types\Core\StringType;
-use loophp\generators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\FakerType;
 
 include __DIR__ . '/../../../vendor/autoload.php';
 

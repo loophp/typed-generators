@@ -7,26 +7,26 @@
 
 declare(strict_types=1);
 
-namespace tests\loophp\generators;
+namespace tests\loophp\TypedGenerators;
 
 use LimitIterator;
-use loophp\generators\Generator\Value;
-use loophp\generators\Types\Core\ArrayType;
-use loophp\generators\Types\Core\BoolType;
-use loophp\generators\Types\Core\ClosureType;
-use loophp\generators\Types\Core\DateTimeType;
-use loophp\generators\Types\Core\FloatType;
-use loophp\generators\Types\Core\IntType;
-use loophp\generators\Types\Core\ListType;
-use loophp\generators\Types\Core\NullType;
-use loophp\generators\Types\Core\ObjectType;
-use loophp\generators\Types\Core\StringType;
-use loophp\generators\Types\TypeGenerator;
+use loophp\TypedGenerators\Generator\Value;
+use loophp\TypedGenerators\Types\Core\ArrayType;
+use loophp\TypedGenerators\Types\Core\BoolType;
+use loophp\TypedGenerators\Types\Core\ClosureType;
+use loophp\TypedGenerators\Types\Core\DateTimeType;
+use loophp\TypedGenerators\Types\Core\FloatType;
+use loophp\TypedGenerators\Types\Core\IntType;
+use loophp\TypedGenerators\Types\Core\ListType;
+use loophp\TypedGenerators\Types\Core\NullType;
+use loophp\TypedGenerators\Types\Core\ObjectType;
+use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\TypeGenerator;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversDefaultClass \loophp\generators
+ * @coversDefaultClass \loophp\TypedGenerators
  */
 final class ValueTest extends TestCase
 {

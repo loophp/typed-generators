@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace loophp\generators\Types\Core;
+namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\generators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\TypeGenerator;
 
 use function count;
 

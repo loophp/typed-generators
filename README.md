@@ -13,7 +13,7 @@
 
 ## Description
 
-Generate random values of specific types and in any shape.
+Generate random typed values and in any shape.
 
 ## Features
 
@@ -32,9 +32,9 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\generators\Generator\KeyValue;
-use loophp\generators\Types\Core\BoolType;
-use loophp\generators\Types\Core\StringType;
+use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\BoolType;
+use loophp\TypedGenerators\Types\Core\StringType;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -56,9 +56,9 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\generators\Generator\KeyValue;
-use loophp\generators\Types\Core\BoolType;
-use loophp\generators\Types\Core\StringType;
+use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\BoolType;
+use loophp\TypedGenerators\Types\Core\StringType;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -82,9 +82,9 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\generators\Generator\KeyValue;
-use loophp\generators\Types\Core\StringType;
-use loophp\generators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\FakerType;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -115,12 +115,12 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\generators\Generator\KeyValue;
-use loophp\generators\Types\Core\BoolType;
-use loophp\generators\Types\Core\IntType;
-use loophp\generators\Types\Core\StringType;
-use loophp\generators\Types\Hybrid\Compound;
-use loophp\generators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\BoolType;
+use loophp\TypedGenerators\Types\Core\IntType;
+use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\Compound;
+use loophp\TypedGenerators\Types\Hybrid\FakerType;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -152,11 +152,11 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\generators\Types\Core\ArrayType;
-use loophp\generators\Types\Core\BoolType;
-use loophp\generators\Types\Core\StringType;
-use loophp\generators\Types\Hybrid\Compound;
-use loophp\generators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\Types\Core\ArrayType;
+use loophp\TypedGenerators\Types\Core\BoolType;
+use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\Compound;
+use loophp\TypedGenerators\Types\Hybrid\FakerType;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -219,7 +219,7 @@ Analyzing files...
 
 I
 
-INFO: Trace - test-gen.php:41:0 - $complexArray: loophp\generators\Types\TypeGenerator<array<string, array<string, bool|string>>> (see https://psalm.dev/224)
+INFO: Trace - test-gen.php:41:0 - $complexArray: loophp\TypedGenerators\Types\TypeGenerator<array<string, array<string, bool|string>>> (see https://psalm.dev/224)
 ```
 
 ## Code quality, tests, benchmarks
@@ -258,32 +258,32 @@ See [CHANGELOG.md][43] for a changelog based on [git commits][44].
 
 For more detailed changelogs, please check [the release changelogs][45].
 
-[latest stable version]: https://img.shields.io/packagist/v/loophp/generators.svg?style=flat-square
-[github stars]: https://img.shields.io/github/stars/loophp/generators.svg?style=flat-square
-[total downloads]: https://img.shields.io/packagist/dt/loophp/generators.svg?style=flat-square
-[github workflow status]: https://img.shields.io/github/workflow/status/loophp/generators/Unit%20tests?style=flat-square
-[code quality]: https://img.shields.io/scrutinizer/quality/g/loophp/generators/main.svg?style=flat-square
+[latest stable version]: https://img.shields.io/packagist/v/loophp/typed-generators.svg?style=flat-square
+[github stars]: https://img.shields.io/github/stars/loophp/typed-generators.svg?style=flat-square
+[total downloads]: https://img.shields.io/packagist/dt/loophp/typed-generators.svg?style=flat-square
+[github workflow status]: https://img.shields.io/github/workflow/status/loophp/typed-generators/Unit%20tests?style=flat-square
+[code quality]: https://img.shields.io/scrutinizer/quality/g/loophp/typed-generators/main.svg?style=flat-square
 [type coverage]: https://img.shields.io/badge/dynamic/json?style=flat-square&color=color&label=Type%20coverage&query=message&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Floophp%2Fiterators%2Fcoverage
-[code coverage]: https://img.shields.io/scrutinizer/coverage/g/loophp/generators/main.svg?style=flat-square
-[license]: https://img.shields.io/packagist/l/loophp/generators.svg?style=flat-square
+[code coverage]: https://img.shields.io/scrutinizer/coverage/g/loophp/typed-generators/main.svg?style=flat-square
+[license]: https://img.shields.io/packagist/l/loophp/typed-generators.svg?style=flat-square
 [donate github]: https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
 [donate paypal]: https://img.shields.io/badge/Sponsor-Paypal-brightgreen.svg?style=flat-square
 [mutation badge image]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Floophp%2Fiterators%2Fmain
-[mutation badge link]: https://dashboard.stryker-mutator.io/reports/github.com/loophp/generators/main
-[1]: https://packagist.org/packages/loophp/generators
-[2]: https://github.com/loophp/generators/actions
-[3]: https://scrutinizer-ci.com/g/loophp/generators/?branch=main
-[4]: https://shepherd.dev/github/loophp/generators
+[mutation badge link]: https://dashboard.stryker-mutator.io/reports/github.com/loophp/typed-generators/main
+[1]: https://packagist.org/packages/loophp/typed-generators
+[2]: https://github.com/loophp/typed-generators/actions
+[3]: https://scrutinizer-ci.com/g/loophp/typed-generators/?branch=main
+[4]: https://shepherd.dev/github/loophp/typed-generators
 [5]: https://github.com/sponsors/drupol
-[6]: https://github.com/loophp/generators/graphs/contributors
-[34]: https://github.com/loophp/generators/issues
+[6]: https://github.com/loophp/typed-generators/graphs/contributors
+[34]: https://github.com/loophp/typed-generators/issues
 [35]: https://www.phpunit.de/
 [36]: https://github.com/phpro/grumphp
 [37]: https://github.com/infection/infection
 [38]: https://github.com/phpstan/phpstan
 [39]: https://github.com/vimeo/psalm
-[43]: https://github.com/loophp/generators/blob/main/CHANGELOG.md
-[44]: https://github.com/loophp/generators/commits/main
-[45]: https://github.com/loophp/generators/releases
+[43]: https://github.com/loophp/typed-generators/blob/main/CHANGELOG.md
+[44]: https://github.com/loophp/typed-generators/commits/main
+[45]: https://github.com/loophp/typed-generators/releases
 [48]: https://www.php.net/cachingiterator
 [49]: https://www.php.net/generator

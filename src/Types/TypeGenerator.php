@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace loophp\generators\Types;
+namespace loophp\TypedGenerators\Types;
 
 /**
  * @template T

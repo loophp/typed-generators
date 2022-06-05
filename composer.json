@@ -1,6 +1,6 @@
 {
-    "name": "loophp/generators",
-    "description": "TODO",
+    "name": "loophp/typed-generators",
+    "description": "Generate random typed values and in any shape.",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -15,10 +15,10 @@
             "role": "author"
         }
     ],
-    "homepage": "https://github.com/loophp/generators",
+    "homepage": "https://github.com/loophp/typed-generators",
     "support": {
-        "issues": "https://github.com/loophp/generators/issues",
-        "source": "https://github.com/loophp/generators"
+        "issues": "https://github.com/loophp/typed-generators/issues",
+        "source": "https://github.com/loophp/typed-generators"
     },
     "funding": [
         {
@@ -30,10 +30,12 @@
         "php": ">= 7.4"
     },
     "require-dev": {
+        "ext-pcov": "*",
         "drupol/php-conventions": "^5",
         "fakerphp/faker": "^1.19",
         "infection/infection": "^0.26",
         "phpbench/phpbench": "^1.2",
+        "phpstan/phpstan-phpunit": "^1.1",
         "phpstan/phpstan-strict-rules": "^1.0",
         "phpunit/php-code-coverage": "^9.2",
         "phpunit/phpunit": "^9.5",
@@ -41,13 +43,13 @@
     },
     "autoload": {
         "psr-4": {
-            "loophp\\generators\\": "./src/"
+            "loophp\\TypedGenerators\\": "./src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "benchmarks\\loophp\\generators\\": "./tests/benchmarks/",
-            "tests\\loophp\\generators\\": "./tests/unit/"
+            "benchmarks\\loophp\\TypedGenerators\\": "./tests/benchmarks/",
+            "tests\\loophp\\TypedGenerators\\": "./tests/unit/"
         }
     },
     "config": {

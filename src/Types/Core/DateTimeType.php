@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace loophp\generators\Types\Core;
+namespace loophp\TypedGenerators\Types\Core;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use loophp\generators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
  * @implements TypeGenerator<DateTimeInterface>

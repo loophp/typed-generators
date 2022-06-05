@@ -7,15 +7,15 @@
 
 declare(strict_types=1);
 
-namespace tests\loophp\generators\Types\Core;
+namespace tests\loophp\TypedGenerators\Types\Core;
 
-use loophp\generators\Types\Core\IntType;
+use loophp\TypedGenerators\Types\Core\IntType;
 use PHPUnit\Framework\TestCase;
 use function strlen;
 
 /**
  * @internal
- * @coversDefaultClass \loophp\generators
+ * @coversDefaultClass \loophp\TypedGenerators
  */
 final class IntTypeTest extends TestCase
 {

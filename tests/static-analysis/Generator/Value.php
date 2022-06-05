@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-use loophp\generators\Generator\Value;
-use loophp\generators\Types\Core\BoolType;
-use loophp\generators\Types\Core\StringType;
+use loophp\TypedGenerators\Generator\Value;
+use loophp\TypedGenerators\Types\Core\BoolType;
+use loophp\TypedGenerators\Types\Core\StringType;
 
 include __DIR__ . '/../../../vendor/autoload.php';
 

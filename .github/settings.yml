@@ -67,5 +67,5 @@ repository:
     has_pages: false
     has_projects: false
     has_wiki: false
-    name: generators
+    name: typed-generators
     private: false

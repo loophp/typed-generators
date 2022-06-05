@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace loophp\generators\Generator;
+namespace loophp\TypedGenerators\Generator;
 
 use Generator;
-use loophp\generators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
  * @template TKey

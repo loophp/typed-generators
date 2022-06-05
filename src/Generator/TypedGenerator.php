@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace loophp\generators\Generator;
+namespace loophp\TypedGenerators\Generator;
 
 use Generator;
 use IteratorAggregate;
