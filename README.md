@@ -89,7 +89,7 @@ use loophp\generators\Types\Hybrid\FakerType;
 include __DIR__ . '/vendor/autoload.php';
 
 $fakerType = FakerType::new(
-    new StringType(),
+    StringType::new(),
     fn (Generator $faker): string => $faker->city()
 );
 
@@ -123,7 +123,7 @@ use loophp\generators\Types\Hybrid\FakerType;
 include __DIR__ . '/vendor/autoload.php';
 
 $fakerType = FakerType::new(
-    new StringType(),
+    StringType::new(),
     fn (Generator $faker): string => $faker->firstName()
 );
 
