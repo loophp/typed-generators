@@ -16,13 +16,18 @@ use loophp\generators\Types\TypeGenerator;
  */
 final class ArrayType implements TypeGenerator
 {
+    /**
+     * @return array<array-key, mixed>
+     */
     public function __invoke(): array
     {
         return [];
     }
 
     /**
-     * @param array $input
+     * @param array<array-key, mixed> $input
+     *
+     * @return array<array-key, mixed>
      */
     public function identity($input): array
     {

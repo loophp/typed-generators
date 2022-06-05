@@ -23,7 +23,7 @@ final class ClosureType implements TypeGenerator
     }
 
     /**
-     * @param mixed $input
+     * @param Closure $input
      */
     public function identity($input): Closure
     {
