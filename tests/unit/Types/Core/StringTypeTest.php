@@ -11,6 +11,7 @@ namespace tests\loophp\generators\Types\Core;
 
 use loophp\generators\Types\Core\StringType;
 use PHPUnit\Framework\TestCase;
+use function ord;
 use function strlen;
 
 /**
@@ -50,6 +51,11 @@ final class StringTypeTest extends TestCase
             'length' => 4,
             'prefix' => 'e',
         ];
+
+        yield [
+            'length' => 100,
+            'prefix' => 'a',
+        ];
     }
 
     /**
@@ -73,5 +79,10 @@ final class StringTypeTest extends TestCase
         }
 
         self::assertEquals(($length ?? 1) + strlen($prefix), strlen($stringType));
+
+        foreach (str_split($stringType) as $encoding) {
+            self::assertGreaterThan(32, ord($encoding));
+            self::assertLessThan(127, ord($encoding));
+        }
     }
 }
