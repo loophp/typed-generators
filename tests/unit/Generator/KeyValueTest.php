@@ -17,6 +17,7 @@ use loophp\generators\Types\Core\ClosureType;
 use loophp\generators\Types\Core\DateTimeType;
 use loophp\generators\Types\Core\FloatType;
 use loophp\generators\Types\Core\IntType;
+use loophp\generators\Types\Core\ListType;
 use loophp\generators\Types\Core\NullType;
 use loophp\generators\Types\Core\ObjectType;
 use loophp\generators\Types\Core\StringType;
@@ -50,8 +51,13 @@ final class KeyValueTest extends TestCase
         ];
 
         yield [
-            new ArrayType(),
-            new ArrayType(),
+            new ArrayType(new IntType(), new StringType()),
+            new ArrayType(new IntType(), new StringType()),
+        ];
+
+        yield [
+            new ListType(new StringType()),
+            new ListType(new StringType()),
         ];
 
         yield [
