@@ -15,8 +15,6 @@
 
 Generate random typed values and in any shape.
 
-## Features
-
 ## Installation
 
 ```composer require loophp/typed-generators```
