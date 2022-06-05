@@ -20,9 +20,12 @@ final class StringType implements TypeGenerator
 {
     private int $length;
 
-    public function __construct(int $length = 1)
+    private string $prefix;
+
+    public function __construct(int $length = 1, string $prefix = '')
     {
         $this->length = $length;
+        $this->prefix = $prefix;
     }
 
     public function __invoke(): string
@@ -32,7 +35,7 @@ final class StringType implements TypeGenerator
             static function (string $start): string {
                 return $start . chr(random_int(33, 126));
             },
-            ''
+            $this->prefix
         );
     }
 
@@ -44,8 +47,8 @@ final class StringType implements TypeGenerator
         return $input;
     }
 
-    public static function new(int $length = 1): self
+    public static function new(int $length = 1, string $prefix = ''): self
     {
-        return new self($length);
+        return new self($length, $prefix);
     }
 }

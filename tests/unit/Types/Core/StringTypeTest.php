@@ -22,35 +22,56 @@ final class StringTypeTest extends TestCase
     public function stringTypeProvider()
     {
         yield [
+            'length' => false,
+            'prefix' => false,
+        ];
+
+        yield [
             'length' => null,
+            'prefix' => 'a',
         ];
 
         yield [
             'length' => 1,
+            'prefix' => 'b',
         ];
 
         yield [
             'length' => 2,
+            'prefix' => 'c',
         ];
 
         yield [
             'length' => 3,
+            'prefix' => 'd',
         ];
 
         yield [
             'length' => 4,
+            'prefix' => 'e',
         ];
     }
 
     /**
      * @dataProvider stringTypeProvider
+     *
+     * @param mixed $length
+     * @param mixed $prefix
      */
-    public function testConstructor(?int $length = null)
+    public function testConstructor($length, $prefix)
     {
-        $stringType = null === $length
-            ? StringType::new()()
-            : StringType::new($length)();
+        if ($length === $prefix) {
+            $stringType = StringType::new()();
+            $length = 1;
+            $prefix = '';
+        } else {
+            $stringType = null === $length
+                ? StringType::new(1, $prefix)()
+                : StringType::new($length, $prefix)();
 
-        self::assertEquals($length ?? 1, strlen($stringType));
+            self::assertStringStartsWith($prefix, $stringType);
+        }
+
+        self::assertEquals(($length ?? 1) + strlen($prefix), strlen($stringType));
     }
 }
