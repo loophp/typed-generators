@@ -36,13 +36,13 @@ use loophp\TypedGenerators\Types\Core\StringType;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$value = Value::new(
-    StringType::new() // Generate strings
-);
+$strings = StringType::new(); // Generate strings
 
-foreach ($value as $v) {
-    var_dump($v);     // Random string generated
+foreach ($strings as $string) {
+    var_dump($string);        // Random string generated
 }
+
+echo $strings();             // Print one random string
 ```
 
 ### Generate KeyValue pairs
@@ -54,19 +54,19 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\IteratorType;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\StringType;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$keyValue = KeyValue::new(
-    StringType::new(), // Generate strings for keys
-    BoolType::new()    // Generate booleans for values
+$iteratorStringBool = IteratorType::new(
+    StringType::new(),       // Keys: Generate strings for keys
+    BoolType::new()          // Values: Generate booleans for values
 );
 
-foreach ($keyValue as $k => $v) {
-    var_dump($k, $v);  // Random string for key, random boolean for value.
+foreach ($iteratorStringBool() as $key => $value) {
+    var_dump($key, $value);  // Random string for key, random boolean for value.
 }
 ```
 
@@ -80,7 +80,7 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\IteratorType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\FakerType;
 
@@ -91,13 +91,13 @@ $fakerType = FakerType::new(
     fn (Generator $faker): string => $faker->city()
 );
 
-$keyValue = KeyValue::new(
-    StringType::new(4), // A random string of length 4
-    $fakerType          // A random city name
+$iterator = IteratorType::new(
+    StringType::new(4), // Keys: A random string of length 4
+    $fakerType          // Values: A random city name
 );
 
-foreach ($keyValue as $k => $v) {
-    dump($k, $v);
+foreach ($iterator as $key => $value) {
+    var_dump($key, $value);
 }
 ```
 
@@ -113,7 +113,7 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\Generator\KeyValue;
+use loophp\TypedGenerators\Types\Core\IteratorType;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\IntType;
 use loophp\TypedGenerators\Types\Core\StringType;
@@ -127,16 +127,16 @@ $fakerType = FakerType::new(
     fn (Generator $faker): string => $faker->firstName()
 );
 
-$keyValue = KeyValue::new(
-    BoolType::new(),    // A random boolean for keys.
-    Compound::new(      // A random compound value for values which can be
+$iterator = IteratorType::new(
+    BoolType::new(),    // Keys: A random boolean
+    Compound::new(      // Values: A random compound value which can be
         $fakerType,     // either a firstname
         IntType::new()  // either an integer.
     )
 );
 
-foreach ($keyValue as $k => $v) {
-    dump($k, $v);
+foreach ($iterator as $key => $value) {
+    var_dump($key, $value);
 }
 ```
 

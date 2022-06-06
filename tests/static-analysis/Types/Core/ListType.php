@@ -7,11 +7,9 @@
 
 declare(strict_types=1);
 
-use loophp\TypedGenerators\Generator\Value;
 use loophp\TypedGenerators\Types\Core\BoolType;
+use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\StringType;
-
-include __DIR__ . '/../../../vendor/autoload.php';
 
 /**
  * @param iterable<int, string> $iterable
@@ -20,7 +18,7 @@ function foobarIntString(iterable $iterable): void
 {
 }
 
-foobarIntString(Value::new(StringType::new()));
+foobarIntString(ListType::new(StringType::new())());
 
 /**
  * @param iterable<int, bool> $iterable
@@ -29,4 +27,4 @@ function foobarIntBool(iterable $iterable): void
 {
 }
 
-foobarIntBool(Value::new(BoolType::new()));
+foobarIntBool(ListType::new(BoolType::new())());

@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace tests\loophp\TypedGenerators;
+namespace tests\loophp\TypedGenerators\Types\Core;
 
 use LimitIterator;
-use loophp\TypedGenerators\Generator\Value;
 use loophp\TypedGenerators\Types\Core\ArrayType;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\ClosureType;
 use loophp\TypedGenerators\Types\Core\DateTimeType;
 use loophp\TypedGenerators\Types\Core\FloatType;
 use loophp\TypedGenerators\Types\Core\IntType;
+use loophp\TypedGenerators\Types\Core\IteratorType;
 use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
@@ -28,18 +28,18 @@ use PHPUnit\Framework\TestCase;
  * @internal
  * @coversDefaultClass \loophp\TypedGenerators
  */
-final class ValueTest extends TestCase
+final class IteratorTest extends TestCase
 {
     /**
      * @dataProvider typeProvider
      */
-    public function testKeyValue(TypeGenerator $t1)
+    public function testKeyValue(TypeGenerator $t1, TypeGenerator $t2)
     {
-        $subject = Value::new($t1);
+        $subject = IteratorType::new($t1, $t2);
 
-        foreach (new LimitIterator($subject->getIterator(), 0, 3) as $k => $v) {
-            self::assertSame($k, IntType::new()->identity($k));
-            self::assertSame($v, $t1->identity($v));
+        foreach (new LimitIterator($subject(), 0, 3) as $k => $v) {
+            self::assertSame($k, $t1->identity($k));
+            self::assertSame($v, $t2->identity($v));
         }
     }
 
@@ -47,41 +47,51 @@ final class ValueTest extends TestCase
     {
         yield [
             new StringType(),
+            new StringType(),
         ];
 
         yield [
+            new ArrayType(new IntType(), new StringType()),
             new ArrayType(new IntType(), new StringType()),
         ];
 
         yield [
             new ListType(new StringType()),
+            new ListType(new StringType()),
         ];
 
         yield [
+            new BoolType(),
             new BoolType(),
         ];
 
         yield [
             new ClosureType(),
+            new ClosureType(),
         ];
 
         yield [
+            new DateTimeType(),
             new DateTimeType(),
         ];
 
         yield [
             new FloatType(),
+            new FloatType(),
         ];
 
         yield [
+            new IntType(),
             new IntType(),
         ];
 
         yield [
             new NullType(),
+            new NullType(),
         ];
 
         yield [
+            new ObjectType(),
             new ObjectType(),
         ];
     }
