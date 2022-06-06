@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace tests\loophp\TypedGenerators\Types\Core;
 
+use ArrayIterator;
 use LimitIterator;
 use loophp\TypedGenerators\Types\Core\ArrayType;
 use loophp\TypedGenerators\Types\Core\BoolType;
@@ -31,6 +32,26 @@ use PHPUnit\Framework\TestCase;
  */
 final class IteratorTest extends TestCase
 {
+    public function testGetIterator()
+    {
+        $subject = new IteratorType(new StringType(), new IntType());
+
+        self::assertInstanceOf('Iterator', $subject->getIterator());
+
+        $iterator = new LimitIterator($subject->getIterator(), 0, 3);
+
+        self::assertCount(3, iterator_to_array($iterator));
+    }
+
+    public function testIdentity()
+    {
+        $subject = new IteratorType(new StringType(), new IntType());
+
+        $ab = new ArrayIterator([]);
+
+        self::assertSame($ab, $subject->identity($ab));
+    }
+
     /**
      * @dataProvider typeProvider
      */

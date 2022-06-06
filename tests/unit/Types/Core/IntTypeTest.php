@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace tests\loophp\TypedGenerators\Types\Core;
 
+use LimitIterator;
 use loophp\TypedGenerators\Types\Core\IntType;
 use PHPUnit\Framework\TestCase;
 use function strlen;
@@ -52,5 +53,16 @@ final class IntTypeTest extends TestCase
             : IntType::new($length)();
 
         self::assertEquals($length ?? 1, strlen((string) $intType));
+    }
+
+    public function testGetIterator()
+    {
+        $subject = new IntType();
+
+        self::assertInstanceOf('Iterator', $subject->getIterator());
+
+        $iterator = new LimitIterator($subject->getIterator(), 0, 3);
+
+        self::assertCount(3, iterator_to_array($iterator));
     }
 }

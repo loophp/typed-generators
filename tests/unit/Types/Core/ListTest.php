@@ -30,6 +30,26 @@ use PHPUnit\Framework\TestCase;
  */
 final class ListTest extends TestCase
 {
+    public function testGetIterator()
+    {
+        $subject = new ListType(new IntType());
+
+        self::assertInstanceOf('Iterator', $subject->getIterator());
+
+        $iterator = new LimitIterator($subject->getIterator(), 0, 3);
+
+        self::assertCount(3, iterator_to_array($iterator));
+    }
+
+    public function testIdentity()
+    {
+        $subject = new ListType(new IntType());
+
+        $array = [];
+
+        self::assertSame($array, $subject->identity($array));
+    }
+
     /**
      * @dataProvider typeProvider
      */

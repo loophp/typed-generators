@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace tests\loophp\TypedGenerators\Types\Core;
 
+use LimitIterator;
 use loophp\TypedGenerators\Types\Core\StringType;
 use PHPUnit\Framework\TestCase;
 use function ord;
@@ -84,5 +85,25 @@ final class StringTypeTest extends TestCase
             self::assertGreaterThan(32, ord($encoding));
             self::assertLessThan(127, ord($encoding));
         }
+    }
+
+    public function testGetIterator()
+    {
+        $subject = new StringType();
+
+        self::assertInstanceOf('Iterator', $subject->getIterator());
+
+        $iterator = new LimitIterator($subject->getIterator(), 0, 3);
+
+        self::assertCount(3, iterator_to_array($iterator));
+    }
+
+    public function testIdentity()
+    {
+        $subject = new StringType();
+
+        $string = 'Hello';
+
+        self::assertSame($string, $subject->identity($string));
     }
 }
