@@ -42,7 +42,7 @@ foreach ($strings as $string) {
     var_dump($string);        // Random string generated
 }
 
-echo $strings();             // Print one random string
+echo $strings();              // Print one random string
 ```
 
 ### Generate KeyValue pairs

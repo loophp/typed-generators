@@ -59,10 +59,10 @@ parameters:
             always_execute: true
         clover_coverage:
             clover_file: build/logs/coverage/clover.xml
-            level: 50
+            level: 25
         infection:
             threads: 10
             test_framework: phpunit
             configuration: infection.json
-            min_msi: 90
-            min_covered_msi: 90
+            min_msi: 25
+            min_covered_msi: 25

@@ -37,9 +37,11 @@ final class IteratorTest extends TestCase
     {
         $subject = IteratorType::new($t1, $t2);
 
-        foreach (new LimitIterator($subject(), 0, 3) as $k => $v) {
-            self::assertSame($k, $t1->identity($k));
-            self::assertSame($v, $t2->identity($v));
+        foreach (new LimitIterator($subject->getIterator(), 0, 3) as $iterator) {
+            foreach (new LimitIterator($iterator, 0, 3) as $k => $v) {
+                self::assertSame($k, $t1->identity($k));
+                self::assertSame($v, $t2->identity($v));
+            }
         }
     }
 

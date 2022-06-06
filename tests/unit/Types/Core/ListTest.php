@@ -36,9 +36,11 @@ final class ListTest extends TestCase
     {
         $subject = ListType::new($t1);
 
-        foreach (new LimitIterator($subject->getIterator(), 0, 3) as $v) {
-            self::assertSame(key($v), IntType::new()->identity(key($v)));
-            self::assertSame(current($v), $t1->identity(current($v)));
+        foreach (new LimitIterator($subject->getIterator(), 0, 3) as $list) {
+            foreach ($list as $k => $v) {
+                self::assertSame($k, IntType::new()->identity($k));
+                self::assertSame($v, $t1->identity($v));
+            }
         }
     }
 
