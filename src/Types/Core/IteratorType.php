@@ -76,13 +76,13 @@ final class IteratorType implements TypeGenerator
      * @template WKey
      * @template W
      *
-     * @param TypeGenerator<WKey> $k
-     * @param TypeGenerator<W> $v
+     * @param TypeGenerator<WKey> $key
+     * @param TypeGenerator<W> $value
      *
      * @return IteratorType<WKey, W>
      */
-    public static function new(TypeGenerator $k, TypeGenerator $v): self
+    public static function new(TypeGenerator $key, TypeGenerator $value): self
     {
-        return new self($k, $v);
+        return new self($key, $value);
     }
 }

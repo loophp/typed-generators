@@ -77,13 +77,13 @@ final class FakerType implements TypeGenerator
     /**
      * @template V
      *
-     * @param TypeGenerator<V> $t
+     * @param TypeGenerator<V> $type
      * @param Closure(Generator): V $fakerGenerator
      *
      * @return FakerType<V>
      */
-    public static function new(TypeGenerator $t, Closure $fakerGenerator, ?Generator $faker = null): self
+    public static function new(TypeGenerator $type, Closure $fakerGenerator, ?Generator $faker = null): self
     {
-        return new self($t, $fakerGenerator, $faker);
+        return new self($type, $fakerGenerator, $faker);
     }
 }

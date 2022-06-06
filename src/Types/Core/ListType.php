@@ -75,12 +75,12 @@ final class ListType implements TypeGenerator
     /**
      * @template W
      *
-     * @param TypeGenerator<W> $v
+     * @param TypeGenerator<W> $type
      *
      * @return ListType<W>
      */
-    public static function new(TypeGenerator $v, int $count = 1): self
+    public static function new(TypeGenerator $type, int $count = 1): self
     {
-        return new self($v, $count);
+        return new self($type, $count);
     }
 }
