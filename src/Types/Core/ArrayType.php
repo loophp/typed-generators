@@ -14,7 +14,7 @@ use loophp\TypedGenerators\Types\TypeGenerator;
 use function count;
 
 /**
- * @template TKey
+ * @template TKey of array-key
  * @template T
  *
  * @implements TypeGenerator<array<TKey, T>>
@@ -69,7 +69,7 @@ final class ArrayType implements TypeGenerator
     }
 
     /**
-     * @template WKey
+     * @template WKey of array-key
      * @template W
      *
      * @param TypeGenerator<WKey> $k
