@@ -30,19 +30,17 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\Generator\KeyValue;
-use loophp\TypedGenerators\Types\Core\BoolType;
-use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\TypedGen;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$strings = StringType::new(); // Generate strings
+$strings = TypedGen::string(); // Generate strings
 
 foreach ($strings as $string) {
-    var_dump($string);        // Random string generated
+    var_dump($string);         // Random string generated
 }
 
-echo $strings();              // Print one random string
+echo $strings();               // Print one random string
 ```
 
 ### Generate KeyValue pairs
@@ -54,19 +52,17 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\Types\Core\IteratorType;
-use loophp\TypedGenerators\Types\Core\BoolType;
-use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\TypedGen;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$iteratorStringBool = IteratorType::new(
-    StringType::new(),       // Keys: Generate strings for keys
-    BoolType::new()          // Values: Generate booleans for values
+$iteratorStringBool = TypedGen::iterator(
+    TypedGen::string(),       // Keys: Generate strings for keys
+    TypedGen::bool()          // Values: Generate booleans for values
 );
 
 foreach ($iteratorStringBool() as $key => $value) {
-    var_dump($key, $value);  // Random string for key, random boolean for value.
+    var_dump($key, $value);   // Random string for key, random boolean for value.
 }
 ```
 
@@ -80,23 +76,21 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\Types\Core\IteratorType;
-use loophp\TypedGenerators\Types\Core\StringType;
-use loophp\TypedGenerators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\TypedGen;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$fakerType = FakerType::new(
-    StringType::new(),
+$fakerType = TypedGen::faker(
+    TypedGen::string(),
     fn (Generator $faker): string => $faker->city()
 );
 
-$iterator = IteratorType::new(
-    StringType::new(4), // Keys: A random string of length 4
-    $fakerType          // Values: A random city name
+$iterator = TypedGen::iterator(
+    TypedGen::string(4), // Keys: A random string of length 4
+    $fakerType           // Values: A random city name
 );
 
-foreach ($iterator as $key => $value) {
+foreach ($iterator() as $key => $value) {
     var_dump($key, $value);
 }
 ```
@@ -113,29 +107,24 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\Types\Core\IteratorType;
-use loophp\TypedGenerators\Types\Core\BoolType;
-use loophp\TypedGenerators\Types\Core\IntType;
-use loophp\TypedGenerators\Types\Core\StringType;
-use loophp\TypedGenerators\Types\Hybrid\Compound;
-use loophp\TypedGenerators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\TypedGen;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$fakerType = FakerType::new(
-    StringType::new(),
+$fakerType = TypedGen::faker(
+    TypedGen::string(),
     fn (Generator $faker): string => $faker->firstName()
 );
 
-$iterator = IteratorType::new(
-    BoolType::new(),    // Keys: A random boolean
-    Compound::new(      // Values: A random compound value which can be
-        $fakerType,     // either a firstname
-        IntType::new()  // either an integer.
+$iterator = TypedGen::iterator(
+    TypedGen::bool(),    // Keys: A random boolean
+    TypedGen::compound(  // Values: A random compound value which can be
+        $fakerType,      // either a firstname
+        TypedGen::int()  // either an integer.
     )
 );
 
-foreach ($iterator as $key => $value) {
+foreach ($iterator() as $key => $value) {
     var_dump($key, $value);
 }
 ```
@@ -150,25 +139,19 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\Types\Core\ArrayType;
-use loophp\TypedGenerators\Types\Core\BoolType;
-use loophp\TypedGenerators\Types\Core\StringType;
-use loophp\TypedGenerators\Types\Hybrid\Compound;
-use loophp\TypedGenerators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\TypedGen;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$complexArray = ArrayType::new(
-    StringType::new(),
-    ArrayType::new(
-        StringType::new(),
-        Compound::new(
-            BoolType::new(),
-            FakerType::new(
-                StringType::new(),
-                static function (Generator $faker): string {
-                    return $faker->city();
-                }
+$complexArray = TypedGen::array(
+    TypedGen::string(),
+    TypedGen::array(
+        TypedGen::string(),
+        TypedGen::compound(
+            TypedGen::bool(),
+            TypedGen::faker(
+                TypedGen::string(),
+                fn (Generator $faker): string => $faker->city()
             )
         ),
         6
