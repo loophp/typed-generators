@@ -249,7 +249,7 @@ For more detailed changelogs, please check [the release changelogs][45].
 [license]: https://img.shields.io/packagist/l/loophp/typed-generators.svg?style=flat-square
 [donate github]: https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
 [donate paypal]: https://img.shields.io/badge/Sponsor-Paypal-brightgreen.svg?style=flat-square
-[mutation badge image]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Floophp%2Fiterators%2Fmain
+[mutation badge image]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Floophp%2Ftyped-generators%2Fmain
 [mutation badge link]: https://dashboard.stryker-mutator.io/reports/github.com/loophp/typed-generators/main
 [1]: https://packagist.org/packages/loophp/typed-generators
 [2]: https://github.com/loophp/typed-generators/actions
