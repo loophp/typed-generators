@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use Faker\Factory;
-use Faker\Generator;
 use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
@@ -19,19 +17,11 @@ use loophp\TypedGenerators\Types\TypeGenerator;
  */
 final class BoolType implements TypeGenerator
 {
-    private int $chanceOfGettingTrue;
-
-    private Generator $faker;
-
-    public function __construct(int $chanceOfGettingTrue = 50)
-    {
-        $this->faker = Factory::create();
-        $this->chanceOfGettingTrue = $chanceOfGettingTrue;
-    }
-
     public function __invoke(): bool
     {
-        return $this->faker->boolean($this->chanceOfGettingTrue);
+        return 0 === random_int(0, 1)
+            ? true
+            : false;
     }
 
     /**
@@ -53,8 +43,8 @@ final class BoolType implements TypeGenerator
         return $input;
     }
 
-    public static function new(int $chanceOfGettingTrue = 50): self
+    public static function new(): self
     {
-        return new self($chanceOfGettingTrue);
+        return new self();
     }
 }
