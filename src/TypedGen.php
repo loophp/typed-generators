@@ -25,6 +25,7 @@ use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
+use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 final class TypedGen
@@ -124,6 +125,18 @@ final class TypedGen
     public static function null(): NullType
     {
         return NullType::new();
+    }
+
+    /**
+     * @template W
+     *
+     * @param TypeGenerator<W> $type
+     *
+     * @return Nullable<W>
+     */
+    public static function nullable(TypeGenerator $type): Nullable
+    {
+        return Nullable::new($type);
     }
 
     public static function object(): ObjectType

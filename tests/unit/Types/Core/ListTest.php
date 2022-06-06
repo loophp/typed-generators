@@ -20,6 +20,7 @@ use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use loophp\TypedGenerators\Types\TypeGenerator;
 use PHPUnit\Framework\TestCase;
 
@@ -76,6 +77,10 @@ final class ListTest extends TestCase
 
         yield [
             new IntType(),
+        ];
+
+        yield [
+            new Nullable(new StringType()),
         ];
 
         yield [
