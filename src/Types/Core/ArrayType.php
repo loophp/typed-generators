@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 use function count;
@@ -56,6 +57,17 @@ final class ArrayType implements TypeGenerator
         }
 
         return $return;
+    }
+
+    /**
+     * @return Iterator<int, array<TKey, T>>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**

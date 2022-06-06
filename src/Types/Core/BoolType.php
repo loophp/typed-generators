@@ -11,6 +11,7 @@ namespace loophp\TypedGenerators\Types\Core;
 
 use Faker\Factory;
 use Faker\Generator;
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
@@ -31,6 +32,17 @@ final class BoolType implements TypeGenerator
     public function __invoke(): bool
     {
         return $this->faker->boolean($this->chanceOfGettingTrue);
+    }
+
+    /**
+     * @return Iterator<int, bool>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**

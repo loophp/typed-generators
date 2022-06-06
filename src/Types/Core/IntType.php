@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
@@ -32,6 +33,17 @@ final class IntType implements TypeGenerator
                 range(1, $this->length)
             )
         );
+    }
+
+    /**
+     * @return Iterator<int, int>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**

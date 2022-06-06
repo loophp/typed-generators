@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
@@ -19,6 +20,17 @@ final class FloatType implements TypeGenerator
     public function __invoke(): float
     {
         return (float) (mt_rand() / mt_getrandmax());
+    }
+
+    /**
+     * @return Iterator<int, float>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**

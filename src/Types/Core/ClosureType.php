@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace loophp\TypedGenerators\Types\Core;
 
 use Closure;
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
@@ -20,6 +21,17 @@ final class ClosureType implements TypeGenerator
     public function __invoke()
     {
         return static fn () => true;
+    }
+
+    /**
+     * @return Iterator<int, Closure>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**

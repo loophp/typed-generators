@@ -52,6 +52,17 @@ final class IteratorType implements TypeGenerator
     }
 
     /**
+     * @return Iterator<int, Iterator<TKey, T>>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
+    }
+
+    /**
      * @param Iterator<TKey, T> $input
      *
      * @return Iterator<TKey, T>

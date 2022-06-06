@@ -12,6 +12,7 @@ namespace loophp\TypedGenerators\Types\Hybrid;
 use Closure;
 use Faker\Factory;
 use Faker\Generator;
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
@@ -50,6 +51,17 @@ final class FakerType implements TypeGenerator
     public function __invoke()
     {
         return $this->identity(($this->fakerGenerator)($this->faker));
+    }
+
+    /**
+     * @return Iterator<int, T>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**

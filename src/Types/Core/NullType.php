@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 use TypeError;
 
@@ -20,6 +21,17 @@ final class NullType implements TypeGenerator
     public function __invoke()
     {
         return null;
+    }
+
+    /**
+     * @return Iterator<int, null>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**

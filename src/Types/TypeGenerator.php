@@ -9,15 +9,25 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types;
 
+use Iterator;
+use IteratorAggregate;
+
 /**
  * @template T
+ *
+ * @extends IteratorAggregate<int, T>
  */
-interface TypeGenerator
+interface TypeGenerator extends IteratorAggregate
 {
     /**
      * @return T
      */
     public function __invoke();
+
+    /**
+     * @return Iterator<int, T>
+     */
+    public function getIterator(): Iterator;
 
     /**
      * @param T $input

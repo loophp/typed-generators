@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
+use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 use function chr;
@@ -37,6 +38,17 @@ final class StringType implements TypeGenerator
             },
             $this->prefix
         );
+    }
+
+    /**
+     * @return Iterator<int, string>
+     */
+    public function getIterator(): Iterator
+    {
+        // @phpstan-ignore-next-line
+        while (true) {
+            yield $this->__invoke();
+        }
     }
 
     /**
