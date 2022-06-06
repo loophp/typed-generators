@@ -24,7 +24,7 @@ use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
-use loophp\TypedGenerators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 final class TypedGen
@@ -78,11 +78,11 @@ final class TypedGen
      * @param TypeGenerator<V> $type
      * @param Closure(Generator): V $fakerGenerator
      *
-     * @return FakerType<V>
+     * @return Faker<V>
      */
-    public static function faker(TypeGenerator $type, Closure $fakerGenerator, ?Generator $faker = null): FakerType
+    public static function faker(TypeGenerator $type, Closure $fakerGenerator, ?Generator $faker = null): Faker
     {
-        return FakerType::new($type, $fakerGenerator, $faker);
+        return Faker::new($type, $fakerGenerator, $faker);
     }
 
     public static function float(): FloatType

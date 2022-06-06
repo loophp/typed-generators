@@ -20,7 +20,7 @@ use loophp\TypedGenerators\Types\TypeGenerator;
  *
  * @implements TypeGenerator<T>
  */
-final class FakerType implements TypeGenerator
+final class Faker implements TypeGenerator
 {
     private Generator $faker;
 
@@ -80,7 +80,7 @@ final class FakerType implements TypeGenerator
      * @param TypeGenerator<V> $type
      * @param Closure(Generator): V $fakerGenerator
      *
-     * @return FakerType<V>
+     * @return Faker<V>
      */
     public static function new(TypeGenerator $type, Closure $fakerGenerator, ?Generator $faker = null): self
     {

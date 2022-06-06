@@ -10,7 +10,7 @@ declare(strict_types=1);
 use Faker\Generator;
 use loophp\TypedGenerators\Types\Core\IteratorType;
 use loophp\TypedGenerators\Types\Core\StringType;
-use loophp\TypedGenerators\Types\Hybrid\FakerType;
+use loophp\TypedGenerators\Types\Hybrid\Faker;
 
 /**
  * @param iterable<string, string> $iterable
@@ -19,7 +19,7 @@ function foobar(iterable $iterable): void
 {
 }
 
-$fakerType = FakerType::new(
+$fakerType = Faker::new(
     StringType::new(),
     static function (Generator $faker): string {
         return $faker->city();
