@@ -27,6 +27,7 @@ use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
+use loophp\TypedGenerators\Types\Hybrid\StaticType;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 final class TG
@@ -156,6 +157,19 @@ final class TG
     public static function object(): ObjectType
     {
         return ObjectType::new();
+    }
+
+    /**
+     * @template W
+     *
+     * @param TypeGenerator<W> $type
+     * @param W $value
+     *
+     * @return StaticType<W>
+     */
+    public static function static(TypeGenerator $type, $value): StaticType
+    {
+        return StaticType::new($type, $value);
     }
 
     public static function string(int $length = 1): StringType

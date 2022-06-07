@@ -26,6 +26,7 @@ use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
+use loophp\TypedGenerators\Types\Hybrid\StaticType;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -145,6 +146,15 @@ final class TGTest extends TestCase
             'method' => 'object',
             'arguments' => [],
             'class' => ObjectType::class,
+        ];
+
+        yield [
+            'method' => 'static',
+            'arguments' => [
+                new StringType(),
+                'foo',
+            ],
+            'class' => StaticType::class,
         ];
 
         yield [
