@@ -84,6 +84,19 @@ final class TG
         return Compound::new($t1, $t2);
     }
 
+    /**
+     * @template V
+     *
+     * @param TypeGenerator<V> $type
+     * @param Closure(TypeGenerator<V>): V $generator
+     *
+     * @return Custom<V>
+     */
+    public static function custom(TypeGenerator $type, Closure $generator): Custom
+    {
+        return Custom::new($type, $generator);
+    }
+
     public static function datetime(?DateTimeInterface $from = null, ?DateTimeInterface $to = null): DateTimeType
     {
         return DateTimeType::new($from, $to);

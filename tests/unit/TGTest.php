@@ -85,6 +85,15 @@ final class TGTest extends TestCase
         ];
 
         yield [
+            'method' => 'custom',
+            'arguments' => [
+                new StringType(),
+                static fn (): string => 'hello',
+            ],
+            'class' => Custom::class,
+        ];
+
+        yield [
             'method' => 'datetime',
             'arguments' => [],
             'class' => DateTimeType::class,
