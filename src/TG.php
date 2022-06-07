@@ -28,6 +28,7 @@ use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use loophp\TypedGenerators\Types\Hybrid\StaticType;
+use loophp\TypedGenerators\Types\Hybrid\UniqidType;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 final class TG
@@ -175,5 +176,10 @@ final class TG
     public static function string(int $length = 1): StringType
     {
         return StringType::new($length);
+    }
+
+    public static function uniqid(string $prefix = '', bool $moreEntropy = false): UniqidType
+    {
+        return UniqidType::new($prefix, $moreEntropy);
     }
 }
