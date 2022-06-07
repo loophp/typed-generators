@@ -12,8 +12,6 @@ namespace loophp\TypedGenerators\Types\Core;
 use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
-use function count;
-
 /**
  * @template T
  *
@@ -21,20 +19,17 @@ use function count;
  */
 final class ListType implements TypeGenerator
 {
-    private int $count;
-
     /**
-     * @var TypeGenerator<T>
+     * @var list<TypeGenerator<T>>
      */
-    private TypeGenerator $value;
+    private array $values = [];
 
     /**
      * @param TypeGenerator<T> $v
      */
-    public function __construct(TypeGenerator $v, int $count = 1)
+    public function __construct(TypeGenerator $v)
     {
-        $this->value = $v;
-        $this->count = $count;
+        $this->values[] = $v;
     }
 
     /**
@@ -42,13 +37,37 @@ final class ListType implements TypeGenerator
      */
     public function __invoke(): array
     {
-        $return = [];
+        return array_map(
+            /**
+             * @param TypeGenerator<T> $type
+             *
+             * @return T
+             */
+            static fn (TypeGenerator $type) => $type(),
+            $this->values
+        );
+    }
 
-        while (count($return) < $this->count) {
-            $return[] = ($this->value)();
-        }
+    /**
+     * @template V
+     *
+     * @param TypeGenerator<V> $type
+     *
+     * @return ListType<T|V>
+     */
+    public function add(TypeGenerator $type): self
+    {
+        // @TODO: See if we can fix this issue in PHPStan/PSalm.
+        // There should not be @var annotation here.
+        // An issue has been opened: https://github.com/vimeo/psalm/issues/8066
+        /** @var ListType<T|V> $clone */
+        $clone = clone $this;
 
-        return $return;
+        /** @var list<TypeGenerator<T|V>> $values */
+        $values = array_merge($this->values, [$type]);
+        $clone->values = $values;
+
+        return $clone;
     }
 
     /**
@@ -56,7 +75,7 @@ final class ListType implements TypeGenerator
      */
     public function getIterator(): Iterator
     {
-        // @phpstan-ignore-next-line
+        /** @phpstan-ignore-next-line */
         while (true) {
             yield $this->__invoke();
         }
@@ -79,8 +98,8 @@ final class ListType implements TypeGenerator
      *
      * @return ListType<W>
      */
-    public static function new(TypeGenerator $type, int $count = 1): self
+    public static function new(TypeGenerator $type): self
     {
-        return new self($type, $count);
+        return new self($type);
     }
 }
