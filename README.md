@@ -30,11 +30,11 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\TypedGen;
+use loophp\TypedGenerators\TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$strings = TypedGen::string(); // Generate strings
+$strings = TG::string(); // Generate strings
 
 foreach ($strings as $string) {
     var_dump($string);         // Random string generated
@@ -52,13 +52,13 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\TypedGen;
+use loophp\TypedGenerators\TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$iteratorStringBool = TypedGen::iterator(
-    TypedGen::string(),       // Keys: Generate strings for keys
-    TypedGen::bool()          // Values: Generate booleans for values
+$iteratorStringBool = TG::iterator(
+    TG::string(),       // Keys: Generate strings for keys
+    TG::bool()          // Values: Generate booleans for values
 );
 
 foreach ($iteratorStringBool() as $key => $value) {
@@ -76,17 +76,17 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TypedGen;
+use loophp\TypedGenerators\TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$fakerType = TypedGen::faker(
-    TypedGen::string(),
+$fakerType = TG::faker(
+    TG::string(),
     fn (Generator $faker): string => $faker->city()
 );
 
-$iterator = TypedGen::iterator(
-    TypedGen::string(4), // Keys: A random string of length 4
+$iterator = TG::iterator(
+    TG::string(4), // Keys: A random string of length 4
     $fakerType           // Values: A random city name
 );
 
@@ -107,20 +107,20 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TypedGen;
+use loophp\TypedGenerators\TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$fakerType = TypedGen::faker(
-    TypedGen::string(),
+$fakerType = TG::faker(
+    TG::string(),
     fn (Generator $faker): string => $faker->firstName()
 );
 
-$iterator = TypedGen::iterator(
-    TypedGen::bool(),    // Keys: A random boolean
-    TypedGen::compound(  // Values: A random compound value which can be
+$iterator = TG::iterator(
+    TG::bool(),    // Keys: A random boolean
+    TG::compound(  // Values: A random compound value which can be
         $fakerType,      // either a firstname
-        TypedGen::int()  // either an integer.
+        TG::int()  // either an integer.
     )
 );
 
@@ -139,29 +139,29 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TypedGen;
+use loophp\TypedGenerators\TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$countries = TypedGen::faker(
-    TypedGen::string(),
+$countries = TG::faker(
+    TG::string(),
     static fn (Generator $faker): string => $faker->country()
 );
 
-$cities = TypedGen::faker(
-    TypedGen::string(),
+$cities = TG::faker(
+    TG::string(),
     static fn (Generator $faker): string => $faker->city()
 );
 
-$iterator = TypedGen::arrayshape(
-    TypedGen::string(),
-    TypedGen::bool()
+$iterator = TG::arrayshape(
+    TG::string(),
+    TG::bool()
 )->add(
     $countries,
     $cities
 )->add(
-    TypedGen::int(),
-    TypedGen::datetime()
+    TG::int(),
+    TG::datetime()
 );
 
 /** @psalm-trace $iterator */

@@ -25,11 +25,12 @@ use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\ArrayShape;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
+use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
-final class TypedGen
+final class TG
 {
     /**
      * @template WKey of array-key

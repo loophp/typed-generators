@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace tests\loophp\TypedGenerators;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TypedGen;
+use loophp\TypedGenerators\TG;
 use loophp\TypedGenerators\Types\Core\ArrayType;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\ClosureType;
@@ -24,6 +24,7 @@ use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\ArrayShape;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
+use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use PHPUnit\Framework\TestCase;
@@ -32,14 +33,14 @@ use PHPUnit\Framework\TestCase;
  * @internal
  * @coversDefaultClass \loophp\TypedGenerators
  */
-final class TypeGenTest extends TestCase
+final class TGTest extends TestCase
 {
     /**
      * @dataProvider typeProvider
      */
     public function testStaticFactories(string $method, array $arguments, string $class)
     {
-        self::assertInstanceOf($class, TypedGen::{$method}(...$arguments));
+        self::assertInstanceOf($class, TG::{$method}(...$arguments));
     }
 
     public function typeProvider()
