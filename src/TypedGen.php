@@ -23,6 +23,7 @@ use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\ArrayShape;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
@@ -42,6 +43,20 @@ final class TypedGen
     public static function array(TypeGenerator $key, TypeGenerator $value, int $count = 1): ArrayType
     {
         return ArrayType::new($key, $value, $count);
+    }
+
+    /**
+     * @template WKey of array-key
+     * @template W
+     *
+     * @param TypeGenerator<WKey> $key
+     * @param TypeGenerator<W> $value
+     *
+     * @return ArrayShape<WKey, W>
+     */
+    public static function arrayShape(TypeGenerator $key, TypeGenerator $value): ArrayShape
+    {
+        return ArrayShape::new($key, $value);
     }
 
     public static function bool(): BoolType
