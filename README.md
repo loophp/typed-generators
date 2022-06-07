@@ -34,7 +34,7 @@ use loophp\TypedGenerators\TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$strings = TG::string(); // Generate strings
+$strings = TG::string();       // Generate strings
 
 foreach ($strings as $string) {
     var_dump($string);         // Random string generated
@@ -87,7 +87,7 @@ $fakerType = TG::faker(
 
 $iterator = TG::iterator(
     TG::string(4), // Keys: A random string of length 4
-    $fakerType           // Values: A random city name
+    $fakerType     // Values: A random city name
 );
 
 foreach ($iterator() as $key => $value) {
@@ -119,7 +119,7 @@ $fakerType = TG::faker(
 $iterator = TG::iterator(
     TG::bool(),    // Keys: A random boolean
     TG::compound(  // Values: A random compound value which can be
-        $fakerType,      // either a firstname
+        $fakerType,// either a firstname
         TG::int()  // either an integer.
     )
 );
@@ -153,7 +153,7 @@ $cities = TG::faker(
     static fn (Generator $faker): string => $faker->city()
 );
 
-$iterator = TG::arrayshape(
+$iterator = TG::arrayShape(
     TG::string(),
     TG::bool()
 )->add(
