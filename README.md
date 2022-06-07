@@ -143,73 +143,113 @@ use loophp\TypedGenerators\TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$countries = TG::faker(
-    TG::string(),
-    static fn (Generator $faker): string => $faker->country()
-);
+$iterator = TG::array(TG::static(TG::string(), 'id'), TG::int(6))
+    ->add(
+        TG::static(TG::string(), 'uuid'),
+        TG::uniqid()
+    )
+    ->add(
+        TG::static(TG::string(), 'firstName'),
+        TG::faker(
+            TG::string(),
+            static fn (Generator $faker): string => $faker->firstName()
+        )
+    )
+    ->add(
+        TG::static(TG::string(), 'country'),
+        TG::faker(
+            TG::string(),
+            static fn (Generator $faker): string => $faker->country()
+        )
+    )
+    ->add(
+        TG::static(TG::string(), 'isCitizen'),
+        TG::bool()
+    )
+    ->add(
+        TG::static(TG::string(), 'hometowm'),
+        TG::faker(
+            TG::string(),
+            static fn (Generator $faker): string => $faker->city()
+        )
+    )
+    ->add(
+        TG::static(TG::string(), 'lastSeen'),
+        TG::datetime()
+    );
 
-$cities = TG::faker(
-    TG::string(),
-    static fn (Generator $faker): string => $faker->city()
-);
-
-$iterator = TG::arrayShape(
-    TG::string(),
-    TG::bool()
-)->add(
-    $countries,
-    $cities
-)->add(
-    TG::int(),
-    TG::datetime()
-);
-
-/** @psalm-trace $iterator */
 foreach ($iterator as $k => $v) {
-    dump($v);
+    // \PHPStan\dumpType($v);
+    /** @psalm-trace $v */
+    print_r($v);
 }
+```
 
-/**
-array:3 [
-  "#" => true
-  "American Samoa" => "New Cortezside"
-  5 => DateTimeImmutable @1194871036 {#64
-    date: 2007-11-12 12:37:16.0 UTC (+00:00)
-  }
-]
-array:3 [
-  "Q" => false
-  "Norway" => "Taraside"
-  2 => DateTimeImmutable @1428398249 {#75
-    date: 2015-04-07 09:17:29.0 UTC (+00:00)
-  }
-]
-array:3 [
-  "X" => true
-  "Saint Pierre and Miquelon" => "South Merrittshire"
-  2 => DateTimeImmutable @1515321957 {#72
-    date: 2018-01-07 10:45:57.0 UTC (+00:00)
-  }
-]
+This example will produce such arrays:
 
-$ ./vendor/bin/phpstan analyse --level=9 test-gen.php
+```
+Array
+(
+    [id] => 545327499
+    [uuid] => 629f7198091ee
+    [firstName] => Sandra
+    [country] => Sardinia
+    [isCitizen] => 1
+    [hometowm] => Ecaussinnes
+    [lastSeen] => DateTimeImmutable Object
+        (
+            [date] => 2009-06-02 07:40:37.000000
+            [timezone_type] => 3
+            [timezone] => UTC
+        )
+)
+Array
+(
+    [id] => 623241523
+    [uuid] => 629f719809290
+    [firstName] => Paolo
+    [country] => Sicily
+    [isCitizen] =>
+    [hometowm] => Quaregnon
+    [lastSeen] => DateTimeImmutable Object
+        (
+            [date] => 1989-11-11 16:22:02.000000
+            [timezone_type] => 3
+            [timezone] => UTC
+        )
+)
+```
 
+Analyzing the `$iterator` variable with PSalm and PHPStan will give:
+
+```shell
+$ ./vendor/bin/phpstan analyse --level=9 test.php
+```
+
+```
  1/1 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 
  ------ --------------------------------------------------------
-  Line   test-gen.php
+  Line   test.php
  ------ --------------------------------------------------------
-  33     Dumped type: array<string, bool|DateTimeInterface|string>
+  45     Dumped type: array<string, bool|DateTimeInterface|int|string>
  ------ --------------------------------------------------------
+```
 
-$ ./vendor/bin/psalm --show-info=true --no-cache test-gen.php
+With PSalm:
+
+```shell
+$ ./vendor/bin/psalm --show-info=true --no-cache test.php
+```
+
+```
 Target PHP version: 7.4 (inferred from composer.json)
 Scanning files...
 Analyzing files...
 
 I
 
-INFO: Trace - test-gen.php:36:1 - $iterator: loophp\TypedGenerators\Types\Hybrid\ArrayShape<int|string, DateTimeInterface|bool|string> (see https://psalm.dev/224)
+INFO: Trace - test.php:46:5 - $v: array<string, DateTimeInterface|bool|int|string> (see https://psalm.dev/224)
 ```
 
 ## Code quality, tests, benchmarks
