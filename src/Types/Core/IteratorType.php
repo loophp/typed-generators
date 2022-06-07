@@ -21,23 +21,23 @@ use loophp\TypedGenerators\Types\TypeGenerator;
 final class IteratorType implements TypeGenerator
 {
     /**
-     * @var TypeGenerator<TKey>
+     * @var list<TypeGenerator<TKey>>
      */
-    private TypeGenerator $key;
+    private array $keys = [];
 
     /**
-     * @var TypeGenerator<T>
+     * @var list<TypeGenerator<T>>
      */
-    private TypeGenerator $value;
+    private array $values = [];
 
     /**
-     * @param TypeGenerator<TKey> $k
-     * @param TypeGenerator<T> $v
+     * @param TypeGenerator<TKey> $key
+     * @param TypeGenerator<T> $value
      */
-    public function __construct(TypeGenerator $k, TypeGenerator $v)
+    public function __construct(TypeGenerator $key, TypeGenerator $value)
     {
-        $this->key = $k;
-        $this->value = $v;
+        $this->keys[] = $key;
+        $this->values[] = $value;
     }
 
     /**
@@ -45,10 +45,37 @@ final class IteratorType implements TypeGenerator
      */
     public function __invoke(): Iterator
     {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield ($this->key)() => ($this->value)();
+        foreach (array_keys($this->keys) as $index) {
+            yield ($this->keys[$index])() => ($this->values[$index])();
         }
+    }
+
+    /**
+     * @template VKey of array-key
+     * @template V
+     *
+     * @param TypeGenerator<VKey> $key
+     * @param TypeGenerator<V> $value
+     *
+     * @return IteratorType<TKey|VKey, T|V>
+     */
+    public function add(TypeGenerator $key, TypeGenerator $value): IteratorType
+    {
+        // @TODO: See if we can fix this issue in PHPStan/PSalm.
+        // There should not be @var annotation here.
+        // An issue has been opened: https://github.com/vimeo/psalm/issues/8066
+        /** @var IteratorType<TKey|VKey, T|V> $clone */
+        $clone = clone $this;
+
+        /** @var list<TypeGenerator<TKey|VKey>> $keys */
+        $keys = array_merge($this->keys, [$key]);
+        $clone->keys = $keys;
+
+        /** @var list<TypeGenerator<T|V>> $values */
+        $values = array_merge($this->values, [$value]);
+        $clone->values = $values;
+
+        return $clone;
     }
 
     /**
