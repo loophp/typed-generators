@@ -107,9 +107,9 @@ final class TG
         return FloatType::new();
     }
 
-    public static function int(): IntType
+    public static function int(int $length = 1): IntType
     {
-        return IntType::new();
+        return IntType::new($length);
     }
 
     /**
