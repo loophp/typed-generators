@@ -22,7 +22,6 @@ use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
-use loophp\TypedGenerators\Types\Hybrid\ArrayShape;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
@@ -52,15 +51,6 @@ final class TGTest extends TestCase
                 new StringType(),
             ],
             'class' => ArrayType::class,
-        ];
-
-        yield [
-            'method' => 'arrayshape',
-            'arguments' => [
-                new StringType(),
-                new StringType(),
-            ],
-            'class' => ArrayShape::class,
         ];
 
         yield [
