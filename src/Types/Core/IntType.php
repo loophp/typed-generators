@@ -29,7 +29,7 @@ final class IntType implements TypeGenerator
         return (int) implode(
             '',
             array_map(
-                static fn (int $value): int => mt_rand(1 === $value ? 1 : 0, 9),
+                fn (int $value): int => 1 === $this->length ? mt_rand(0, 9) : mt_rand(1 === $value ? 1 : 0, 9),
                 range(1, $this->length)
             )
         );
