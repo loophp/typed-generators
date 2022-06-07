@@ -15,13 +15,58 @@
 
 Generate random typed values and in any shape.
 
+Useful for writing your tests, there's no need to write static set of typed
+values, you can now generate them using this tool.
+
+Each generated random values or shape is fully typed and can safely be used by
+existing static analysis tools such as PHPStan or PSalm.
+
 ## Installation
 
 ```composer require loophp/typed-generators```
 
 ## Usage
 
+This library has a single entry point class factory. By using a single factory
+class, the user is able to quickly instantiate objects and use auto-completion.
+
+Find the complete API directly in the [`TG` class][tg class].
+
+### Quick API overview
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Snippet;
+
+use loophp\TypedGenerators\TG;
+
+include __DIR__ . '/vendor/autoload.php';
+
+$arrays    = TG::array(TG::string(), TG::string());
+$booleans  = TG::bool();
+$closures  = TG::closure();
+$compounds = TG::compound(TG::bool(), TG::int());
+$customs   = TG::custom(TG::string(), static fn (): string => 'bar');
+$datetimes = TG::datetime();
+$faker     = TG::faker(TG::string(), static fn (Faker\Generator $faker): string => $faker->city());
+$floats    = TG::float();
+$integers  = TG::int();
+$iterators = TG::iterator(TG::bool(), TG::string());
+$lists     = TG::list(TG::string());
+$nulls     = TG::null();
+$nullables = TG::nullable(TG::string());
+$objects   = TG::object();
+$statics   = TG::static(TG::string(), 'foo');
+$strings   = TG::string();
+$uniqids   = TG::uniqid();
+```
+
 ### Generate list of values
+
+<details>
 
 ```php
 <?php
@@ -43,7 +88,12 @@ foreach ($strings as $string) {
 echo $strings();               // Print one random string
 ```
 
+</details>
+
+
 ### Generate KeyValue pairs
+
+<details>
 
 ```php
 <?php
@@ -66,7 +116,11 @@ foreach ($iteratorStringBool() as $key => $value) {
 }
 ```
 
+</details>
+
 ### Integration with Faker
+
+<details>
 
 ```php
 <?php
@@ -95,9 +149,13 @@ foreach ($iterator() as $key => $value) {
 }
 ```
 
+</details>
+
 ### Use random compound values
 
 Compound values are values that can be either of type `A` or type `B`.
+
+<details>
 
 ```php
 <?php
@@ -129,7 +187,11 @@ foreach ($iterator() as $key => $value) {
 }
 ```
 
+</details>
+
 ### Generate a complex typed array shape
+
+<details>
 
 ```php
 <?php
@@ -185,7 +247,11 @@ foreach ($iterator as $k => $v) {
 }
 ```
 
+</details>
+
 This example will produce such arrays:
+
+<details>
 
 ```
 Array
@@ -220,7 +286,11 @@ Array
 )
 ```
 
+</details>
+
 Analyzing the `$iterator` variable with PSalm and PHPStan will give:
+
+<details>
 
 ```shell
 $ ./vendor/bin/phpstan analyse --level=9 test.php
@@ -236,7 +306,11 @@ $ ./vendor/bin/phpstan analyse --level=9 test.php
  ------ --------------------------------------------------------
 ```
 
+</details>
+
 With PSalm:
+
+<details>
 
 ```shell
 $ ./vendor/bin/psalm --show-info=true --no-cache test.php
@@ -251,6 +325,8 @@ I
 
 INFO: Trace - test.php:46:5 - $v: array<string, DateTimeInterface|bool|int|string> (see https://psalm.dev/224)
 ```
+
+</details>
 
 ## Code quality, tests, benchmarks
 
@@ -317,3 +393,4 @@ For more detailed changelogs, please check [the release changelogs][45].
 [45]: https://github.com/loophp/typed-generators/releases
 [48]: https://www.php.net/cachingiterator
 [49]: https://www.php.net/generator
+[tg class]: https://github.com/loophp/typed-generators/blob/main/src/TG.php
