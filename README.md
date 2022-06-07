@@ -143,64 +143,73 @@ use loophp\TypedGenerators\TypedGen;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$complexArray = TypedGen::array(
+$countries = TypedGen::faker(
     TypedGen::string(),
-    TypedGen::array(
-        TypedGen::string(),
-        TypedGen::compound(
-            TypedGen::bool(),
-            TypedGen::faker(
-                TypedGen::string(),
-                fn (Generator $faker): string => $faker->city()
-            )
-        ),
-        6
-    ),
-    2
+    static fn (Generator $faker): string => $faker->country()
 );
 
-var_dump($complexArray());
+$cities = TypedGen::faker(
+    TypedGen::string(),
+    static fn (Generator $faker): string => $faker->city()
+);
 
-/** @psalm-trace $complexArray */
+$iterator = TypedGen::arrayshape(
+    TypedGen::string(),
+    TypedGen::bool()
+)->add(
+    $countries,
+    $cities
+)->add(
+    TypedGen::int(),
+    TypedGen::datetime()
+);
 
-/*
-array:2 [
-  "*" => array:6 [
-    "X" => true
-    """ => true
-    "p" => false
-    "{" => false
-    "#" => "West Shyann"
-    9 => "Amaliamouth"
-  ]
-  "s" => array:6 [
-    "k" => "Port Nikkistad"
-    "F" => "Beahanstad"
-    "Q" => "New Skylarton"
-    "i" => true
-    ":" => "Harrisberg"
-    "|" => "Port Nathenmouth"
-  ]
+/** @psalm-trace $iterator */
+foreach ($iterator as $k => $v) {
+    dump($v);
+}
+
+/**
+array:3 [
+  "#" => true
+  "American Samoa" => "New Cortezside"
+  5 => DateTimeImmutable @1194871036 {#64
+    date: 2007-11-12 12:37:16.0 UTC (+00:00)
+  }
+]
+array:3 [
+  "Q" => false
+  "Norway" => "Taraside"
+  2 => DateTimeImmutable @1428398249 {#75
+    date: 2015-04-07 09:17:29.0 UTC (+00:00)
+  }
+]
+array:3 [
+  "X" => true
+  "Saint Pierre and Miquelon" => "South Merrittshire"
+  2 => DateTimeImmutable @1515321957 {#72
+    date: 2018-01-07 10:45:57.0 UTC (+00:00)
+  }
 ]
 
-./vendor/bin/phpstan analyse --level=9 test-gen.php
+$ ./vendor/bin/phpstan analyse --level=9 test-gen.php
 
  1/1 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 
  ------ --------------------------------------------------------
   Line   test-gen.php
  ------ --------------------------------------------------------
-  39     Dumped type: array<string, array<string, bool|string>>
+  33     Dumped type: array<string, bool|DateTimeInterface|string>
  ------ --------------------------------------------------------
 
-$ ./vendor/bin/psalm --show-info=true --stats --no-cache test-gen.php
+$ ./vendor/bin/psalm --show-info=true --no-cache test-gen.php
 Target PHP version: 7.4 (inferred from composer.json)
 Scanning files...
 Analyzing files...
 
 I
 
-INFO: Trace - test-gen.php:41:0 - $complexArray: loophp\TypedGenerators\Types\TypeGenerator<array<string, array<string, bool|string>>> (see https://psalm.dev/224)
+INFO: Trace - test-gen.php:36:1 - $iterator: loophp\TypedGenerators\Types\Hybrid\ArrayShape<int|string, DateTimeInterface|bool|string> (see https://psalm.dev/224)
 ```
 
 ## Code quality, tests, benchmarks
