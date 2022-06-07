@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace tests\loophp\TypedGenerators\Types\Core;
 
 use LimitIterator;
-use loophp\TypedGenerators\Types\Core\ArrayType;
 use loophp\TypedGenerators\Types\Core\IntType;
+use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use PHPUnit\Framework\TestCase;
 
@@ -19,11 +19,11 @@ use PHPUnit\Framework\TestCase;
  * @internal
  * @coversDefaultClass \loophp\TypedGenerators
  */
-final class ArrayTypeTest extends TestCase
+final class ListTypeTest extends TestCase
 {
     public function testGetIterator()
     {
-        $subject = new ArrayType(new StringType(), new StringType());
+        $subject = new ListType(new StringType());
 
         self::assertInstanceOf('Iterator', $subject->getIterator());
 
@@ -34,16 +34,16 @@ final class ArrayTypeTest extends TestCase
 
     public function testInvoke()
     {
-        $subject = ArrayType::new(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new())
-            ->add(IntType::new(), IntType::new());
+        $subject = ListType::new(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new())
+            ->add(IntType::new());
 
         self::assertCount(10, $subject());
     }

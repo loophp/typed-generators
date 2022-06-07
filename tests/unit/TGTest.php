@@ -27,6 +27,7 @@ use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use loophp\TypedGenerators\Types\Hybrid\StaticType;
+use loophp\TypedGenerators\Types\Hybrid\UniqidType;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -161,6 +162,12 @@ final class TGTest extends TestCase
             'method' => 'string',
             'arguments' => [],
             'class' => StringType::class,
+        ];
+
+        yield [
+            'method' => 'uniqid',
+            'arguments' => [],
+            'class' => UniqidType::class,
         ];
     }
 }
