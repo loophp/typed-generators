@@ -40,9 +40,9 @@ final class TypedGen
      *
      * @return ArrayType<WKey, W>
      */
-    public static function array(TypeGenerator $key, TypeGenerator $value, int $count = 1): ArrayType
+    public static function array(TypeGenerator $key, TypeGenerator $value): ArrayType
     {
-        return ArrayType::new($key, $value, $count);
+        return ArrayType::new($key, $value);
     }
 
     /**

@@ -12,6 +12,7 @@ namespace loophp\TypedGenerators\Types\Core;
 use Iterator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
+use function array_key_exists;
 use function count;
 
 /**
@@ -22,27 +23,24 @@ use function count;
  */
 final class ArrayType implements TypeGenerator
 {
-    private int $count;
+    /**
+     * @var list<TypeGenerator<TKey>>
+     */
+    private array $keys = [];
 
     /**
-     * @var TypeGenerator<TKey>
+     * @var list<TypeGenerator<T>>
      */
-    private TypeGenerator $key;
+    private array $values = [];
 
     /**
-     * @var TypeGenerator<T>
+     * @param TypeGenerator<TKey> $key
+     * @param TypeGenerator<T> $value
      */
-    private TypeGenerator $value;
-
-    /**
-     * @param TypeGenerator<TKey> $k
-     * @param TypeGenerator<T> $v
-     */
-    public function __construct(TypeGenerator $k, TypeGenerator $v, int $count = 1)
+    public function __construct(TypeGenerator $key, TypeGenerator $value)
     {
-        $this->key = $k;
-        $this->value = $v;
-        $this->count = $count;
+        $this->keys[] = $key;
+        $this->values[] = $value;
     }
 
     /**
@@ -50,13 +48,54 @@ final class ArrayType implements TypeGenerator
      */
     public function __invoke(): array
     {
-        $return = [];
+        $keys = $values = [];
+        $countKeys = count($this->keys);
 
-        while (count($return) < $this->count) {
-            $return[($this->key)()] = ($this->value)();
+        for ($i = 0; count($keys) < $countKeys; ++$i) {
+            $key = ($this->keys[$i])();
+
+            if (array_key_exists($key, $keys)) {
+                --$i;
+
+                continue;
+            }
+
+            $keys[$key] = $key;
         }
 
-        return $return;
+        foreach ($this->values as $value) {
+            $values[] = ($value)();
+        }
+
+        return array_combine($keys, $values);
+    }
+
+    /**
+     * @template VKey of array-key
+     * @template V
+     *
+     * @param TypeGenerator<VKey> $key
+     * @param TypeGenerator<V> $value
+     *
+     * @return ArrayType<TKey|VKey, T|V>
+     */
+    public function add(TypeGenerator $key, TypeGenerator $value): ArrayType
+    {
+        // @TODO: See if we can fix this issue in PHPStan/PSalm.
+        // There should not be @var annotation here.
+        // An issue has been opened: https://github.com/vimeo/psalm/issues/8066
+        /** @var ArrayType<TKey|VKey, T|V> $clone */
+        $clone = clone $this;
+
+        /** @var list<TypeGenerator<TKey|VKey>> $keys */
+        $keys = array_merge($this->keys, [$key]);
+        $clone->keys = $keys;
+
+        /** @var list<TypeGenerator<T|V>> $values */
+        $values = array_merge($this->values, [$value]);
+        $clone->values = $values;
+
+        return $clone;
     }
 
     /**
@@ -64,7 +103,7 @@ final class ArrayType implements TypeGenerator
      */
     public function getIterator(): Iterator
     {
-        // @phpstan-ignore-next-line
+        /** @phpstan-ignore-next-line */
         while (true) {
             yield $this->__invoke();
         }
@@ -84,13 +123,13 @@ final class ArrayType implements TypeGenerator
      * @template WKey of array-key
      * @template W
      *
-     * @param TypeGenerator<WKey> $k
-     * @param TypeGenerator<W> $v
+     * @param TypeGenerator<WKey> $key
+     * @param TypeGenerator<W> $value
      *
      * @return ArrayType<WKey, W>
      */
-    public static function new(TypeGenerator $k, TypeGenerator $v, int $count = 1): self
+    public static function new(TypeGenerator $key, TypeGenerator $value): self
     {
-        return new self($k, $v, $count);
+        return new self($key, $value);
     }
 }
