@@ -14,9 +14,12 @@ use loophp\TypedGenerators\Types\Hybrid\Faker;
 
 /**
  * @param iterable<string, string> $iterable
+ *
+ * @return iterable<string, string> $iterable
  */
-function foobar(iterable $iterable): void
+function foobar(iterable $iterable): iterable
 {
+    return $iterable;
 }
 
 $fakerType = Faker::new(

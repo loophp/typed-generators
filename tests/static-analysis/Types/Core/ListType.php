@@ -13,18 +13,24 @@ use loophp\TypedGenerators\Types\Core\StringType;
 
 /**
  * @param iterable<int, string> $iterable
+ *
+ * @return iterable<int, string> $iterable
  */
-function foobarIntString(iterable $iterable): void
+function foobarIntString(iterable $iterable): iterable
 {
+    return $iterable;
 }
 
 foobarIntString(ListType::new(StringType::new())());
 
 /**
  * @param iterable<int, bool> $iterable
+ *
+ * @return iterable<int, bool> $iterable
  */
-function foobarIntBool(iterable $iterable): void
+function foobarIntBool(iterable $iterable): iterable
 {
+    return $iterable;
 }
 
 foobarIntBool(ListType::new(BoolType::new())());
