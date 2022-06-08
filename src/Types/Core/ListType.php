@@ -9,15 +9,15 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use Iterator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
  * @template T
  *
- * @implements TypeGenerator<list<T>>
+ * @extends AbstractTypeGenerator<list<T>>
  */
-final class ListType implements TypeGenerator
+final class ListType extends AbstractTypeGenerator
 {
     /**
      * @var list<TypeGenerator<T>>
@@ -68,17 +68,6 @@ final class ListType implements TypeGenerator
         $clone->values = $values;
 
         return $clone;
-    }
-
-    /**
-     * @return Iterator<int, list<T>>
-     */
-    public function getIterator(): Iterator
-    {
-        /** @phpstan-ignore-next-line */
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

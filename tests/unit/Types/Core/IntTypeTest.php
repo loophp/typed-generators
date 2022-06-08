@@ -12,7 +12,6 @@ namespace tests\loophp\TypedGenerators\Types\Core;
 use LimitIterator;
 use loophp\TypedGenerators\Types\Core\IntType;
 use PHPUnit\Framework\TestCase;
-use function strlen;
 
 /**
  * @internal
@@ -20,39 +19,9 @@ use function strlen;
  */
 final class IntTypeTest extends TestCase
 {
-    public function intTypeProvider()
+    public function testConstructor()
     {
-        yield [
-            'length' => null,
-        ];
-
-        yield [
-            'length' => 1,
-        ];
-
-        yield [
-            'length' => 2,
-        ];
-
-        yield [
-            'length' => 3,
-        ];
-
-        yield [
-            'length' => 4,
-        ];
-    }
-
-    /**
-     * @dataProvider intTypeProvider
-     */
-    public function testConstructor(?int $length = null)
-    {
-        $intType = null === $length
-            ? IntType::new()()
-            : IntType::new($length)();
-
-        self::assertEquals($length ?? 1, strlen((string) $intType));
+        self::assertIsInt((new IntType())());
     }
 
     public function testGetIterator()

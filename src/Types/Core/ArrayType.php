@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use Iterator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 use function array_key_exists;
@@ -19,9 +19,9 @@ use function count;
  * @template TKey of array-key
  * @template T
  *
- * @implements TypeGenerator<array<TKey, T>>
+ * @extends AbstractTypeGenerator<array<TKey, T>>
  */
-final class ArrayType implements TypeGenerator
+final class ArrayType extends AbstractTypeGenerator
 {
     /**
      * @var list<TypeGenerator<TKey>>
@@ -96,17 +96,6 @@ final class ArrayType implements TypeGenerator
         $clone->values = $values;
 
         return $clone;
-    }
-
-    /**
-     * @return Iterator<int, array<TKey, T>>
-     */
-    public function getIterator(): Iterator
-    {
-        /** @phpstan-ignore-next-line */
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

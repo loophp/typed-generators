@@ -11,13 +11,12 @@ namespace loophp\TypedGenerators\Types\Core;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use Iterator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 
 /**
- * @implements TypeGenerator<DateTimeInterface>
+ * @extends AbstractTypeGenerator<DateTimeInterface>
  */
-final class DateTimeType implements TypeGenerator
+final class DateTimeType extends AbstractTypeGenerator
 {
     private DateTimeInterface $end;
 
@@ -40,17 +39,6 @@ final class DateTimeType implements TypeGenerator
                     $this->end->getTimestamp()
                 )
             );
-    }
-
-    /**
-     * @return Iterator<int, DateTimeInterface>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

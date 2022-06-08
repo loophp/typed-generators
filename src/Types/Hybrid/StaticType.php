@@ -9,15 +9,15 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use Iterator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
  * @template T
  *
- * @implements TypeGenerator<T>
+ * @extends AbstractTypeGenerator<T>
  */
-final class StaticType implements TypeGenerator
+final class StaticType extends AbstractTypeGenerator
 {
     /**
      * @var TypeGenerator<T>
@@ -45,17 +45,6 @@ final class StaticType implements TypeGenerator
     public function __invoke()
     {
         return $this->identity($this->value);
-    }
-
-    /**
-     * @return Iterator<int, T>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

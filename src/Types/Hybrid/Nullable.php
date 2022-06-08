@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use Iterator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\TypeGenerator;
@@ -17,9 +17,9 @@ use loophp\TypedGenerators\Types\TypeGenerator;
 /**
  * @template T
  *
- * @implements TypeGenerator<T|null>
+ * @extends AbstractTypeGenerator<T|null>
  */
-final class Nullable implements TypeGenerator
+final class Nullable extends AbstractTypeGenerator
 {
     /**
      * @var TypeGenerator<T>
@@ -41,17 +41,6 @@ final class Nullable implements TypeGenerator
     public function __invoke()
     {
         return (new BoolType())() ? ($this->type)() : NullType::new()();
-    }
-
-    /**
-     * @return Iterator<int, T|null>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

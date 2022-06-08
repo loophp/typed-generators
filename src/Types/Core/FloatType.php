@@ -9,28 +9,16 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use Iterator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 
 /**
- * @implements TypeGenerator<float>
+ * @extends AbstractTypeGenerator<float>
  */
-final class FloatType implements TypeGenerator
+final class FloatType extends AbstractTypeGenerator
 {
     public function __invoke(): float
     {
-        return (float) (mt_rand() / mt_getrandmax());
-    }
-
-    /**
-     * @return Iterator<int, float>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
+        return (float) (BoolType::new()() ? -1 : 1) * (mt_rand() / mt_getrandmax());
     }
 
     /**

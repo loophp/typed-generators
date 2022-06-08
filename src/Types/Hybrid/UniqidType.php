@@ -9,14 +9,14 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use Iterator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
- * @implements TypeGenerator<string>
+ * @extends AbstractTypeGenerator<string>
  */
-final class UniqidType implements TypeGenerator
+final class UniqidType extends AbstractTypeGenerator
 {
     /**
      * @var TypeGenerator<string>
@@ -34,14 +34,6 @@ final class UniqidType implements TypeGenerator
     public function __invoke(): string
     {
         return $this->type->__invoke();
-    }
-
-    /**
-     * @return Iterator<int, string>
-     */
-    public function getIterator(): Iterator
-    {
-        return $this->type->getIterator();
     }
 
     /**

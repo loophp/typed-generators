@@ -9,29 +9,17 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use Iterator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use stdClass;
 
 /**
- * @implements TypeGenerator<object>
+ * @extends AbstractTypeGenerator<object>
  */
-final class ObjectType implements TypeGenerator
+final class ObjectType extends AbstractTypeGenerator
 {
     public function __invoke(): object
     {
         return new stdClass();
-    }
-
-    /**
-     * @return Iterator<int, object>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

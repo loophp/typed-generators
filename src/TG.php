@@ -23,13 +23,20 @@ use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\ArrayKeyType;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
+use loophp\TypedGenerators\Types\Hybrid\NegativeIntType;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
+use loophp\TypedGenerators\Types\Hybrid\NumericType;
+use loophp\TypedGenerators\Types\Hybrid\PositiveIntType;
 use loophp\TypedGenerators\Types\Hybrid\StaticType;
 use loophp\TypedGenerators\Types\Hybrid\UniqidType;
 use loophp\TypedGenerators\Types\TypeGenerator;
+
+use const PHP_INT_MAX;
+use const PHP_INT_MIN;
 
 final class TG
 {
@@ -45,6 +52,11 @@ final class TG
     public static function array(TypeGenerator $key, TypeGenerator $value): ArrayType
     {
         return ArrayType::new($key, $value);
+    }
+
+    public static function arrayKey(): ArrayKeyType
+    {
+        return ArrayKeyType::new();
     }
 
     public static function bool(): BoolType
@@ -138,6 +150,11 @@ final class TG
         return ListType::new($type);
     }
 
+    public static function negativeInt(int $min = PHP_INT_MIN): NegativeIntType
+    {
+        return NegativeIntType::new($min);
+    }
+
     public static function null(): NullType
     {
         return NullType::new();
@@ -155,9 +172,19 @@ final class TG
         return Nullable::new($type);
     }
 
+    public static function numeric(): NumericType
+    {
+        return NumericType::new();
+    }
+
     public static function object(): ObjectType
     {
         return ObjectType::new();
+    }
+
+    public static function positiveInt(int $max = PHP_INT_MAX): PositiveIntType
+    {
+        return PositiveIntType::new($max);
     }
 
     /**

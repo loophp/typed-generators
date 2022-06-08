@@ -9,41 +9,29 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use Iterator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+
+use const PHP_INT_MAX;
+use const PHP_INT_MIN;
 
 /**
- * @implements TypeGenerator<int>
+ * @extends AbstractTypeGenerator<int>
  */
-final class IntType implements TypeGenerator
+final class IntType extends AbstractTypeGenerator
 {
-    private int $length;
+    private int $max;
 
-    public function __construct(int $length = 1)
+    private int $min;
+
+    public function __construct(int $min = PHP_INT_MIN, int $max = PHP_INT_MAX)
     {
-        $this->length = $length;
+        $this->min = $min;
+        $this->max = $max;
     }
 
     public function __invoke(): int
     {
-        return (int) implode(
-            '',
-            array_map(
-                fn (int $value): int => 1 === $this->length ? mt_rand(0, 9) : mt_rand(1 === $value ? 1 : 0, 9),
-                range(1, $this->length)
-            )
-        );
-    }
-
-    /**
-     * @return Iterator<int, int>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
+        return random_int($this->min, $this->max);
     }
 
     /**
@@ -54,8 +42,8 @@ final class IntType implements TypeGenerator
         return $input;
     }
 
-    public static function new(int $length = 1): self
+    public static function new(int $min = PHP_INT_MIN, int $max = PHP_INT_MAX): self
     {
-        return new self($length);
+        return new self($min, $max);
     }
 }

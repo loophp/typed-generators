@@ -12,15 +12,15 @@ namespace loophp\TypedGenerators\Types\Hybrid;
 use Closure;
 use Faker\Factory;
 use Faker\Generator;
-use Iterator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
 /**
  * @template T
  *
- * @implements TypeGenerator<T>
+ * @extends AbstractTypeGenerator<T>
  */
-final class Faker implements TypeGenerator
+final class Faker extends AbstractTypeGenerator
 {
     private Generator $faker;
 
@@ -51,17 +51,6 @@ final class Faker implements TypeGenerator
     public function __invoke()
     {
         return $this->identity(($this->fakerGenerator)($this->faker));
-    }
-
-    /**
-     * @return Iterator<int, T>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

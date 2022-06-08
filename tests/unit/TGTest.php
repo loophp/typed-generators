@@ -22,10 +22,14 @@ use loophp\TypedGenerators\Types\Core\ListType;
 use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
+use loophp\TypedGenerators\Types\Hybrid\ArrayKeyType;
 use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
+use loophp\TypedGenerators\Types\Hybrid\NegativeIntType;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
+use loophp\TypedGenerators\Types\Hybrid\NumericType;
+use loophp\TypedGenerators\Types\Hybrid\PositiveIntType;
 use loophp\TypedGenerators\Types\Hybrid\StaticType;
 use loophp\TypedGenerators\Types\Hybrid\UniqidType;
 use PHPUnit\Framework\TestCase;
@@ -53,6 +57,12 @@ final class TGTest extends TestCase
                 new StringType(),
             ],
             'class' => ArrayType::class,
+        ];
+
+        yield [
+            'method' => 'arrayKey',
+            'arguments' => [],
+            'class' => ArrayKeyType::class,
         ];
 
         yield [
@@ -130,6 +140,12 @@ final class TGTest extends TestCase
         ];
 
         yield [
+            'method' => 'negativeInt',
+            'arguments' => [],
+            'class' => NegativeIntType::class,
+        ];
+
+        yield [
             'method' => 'null',
             'arguments' => [],
             'class' => NullType::class,
@@ -144,9 +160,21 @@ final class TGTest extends TestCase
         ];
 
         yield [
+            'method' => 'numeric',
+            'arguments' => [],
+            'class' => NumericType::class,
+        ];
+
+        yield [
             'method' => 'object',
             'arguments' => [],
             'class' => ObjectType::class,
+        ];
+
+        yield [
+            'method' => 'positiveInt',
+            'arguments' => [],
+            'class' => PositiveIntType::class,
         ];
 
         yield [

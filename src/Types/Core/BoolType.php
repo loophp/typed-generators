@@ -9,30 +9,18 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use Iterator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 
 /**
- * @implements TypeGenerator<bool>
+ * @extends AbstractTypeGenerator<bool>
  */
-final class BoolType implements TypeGenerator
+final class BoolType extends AbstractTypeGenerator
 {
     public function __invoke(): bool
     {
         return 0 === random_int(0, 1)
             ? true
             : false;
-    }
-
-    /**
-     * @return Iterator<int, bool>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**

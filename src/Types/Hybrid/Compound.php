@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use Iterator;
+use loophp\TypedGenerators\Types\AbstractTypeGenerator;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\TypeGenerator;
 
@@ -17,9 +17,9 @@ use loophp\TypedGenerators\Types\TypeGenerator;
  * @template T
  * @template U
  *
- * @implements TypeGenerator<T|U>
+ * @extends AbstractTypeGenerator<T|U>
  */
-final class Compound implements TypeGenerator
+final class Compound extends AbstractTypeGenerator
 {
     /**
      * @var TypeGenerator<T>
@@ -49,17 +49,6 @@ final class Compound implements TypeGenerator
     public function __invoke()
     {
         return (new BoolType())() ? ($this->t1)() : ($this->t2)();
-    }
-
-    /**
-     * @return Iterator<int, T|U>
-     */
-    public function getIterator(): Iterator
-    {
-        // @phpstan-ignore-next-line
-        while (true) {
-            yield $this->__invoke();
-        }
     }
 
     /**
