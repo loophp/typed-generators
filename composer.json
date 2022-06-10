@@ -61,6 +61,11 @@
         },
         "sort-packages": true
     },
+    "extra": {
+        "grumphp": {
+            "disable-plugin": true
+        }
+    },
     "scripts": {
         "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
         "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
