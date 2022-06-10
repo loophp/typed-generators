@@ -33,23 +33,23 @@ use loophp\TypedGenerators\Types\Hybrid\NumericType;
 use loophp\TypedGenerators\Types\Hybrid\PositiveIntType;
 use loophp\TypedGenerators\Types\Hybrid\StaticType;
 use loophp\TypedGenerators\Types\Hybrid\UniqidType;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 
 use const PHP_INT_MAX;
 use const PHP_INT_MIN;
 
-final class TG
+final class TypeGeneratorFactory
 {
     /**
      * @template WKey of array-key
      * @template W
      *
-     * @param TypeGenerator<WKey> $key
-     * @param TypeGenerator<W> $value
+     * @param Type<WKey> $key
+     * @param Type<W> $value
      *
      * @return ArrayType<WKey, W>
      */
-    public static function array(TypeGenerator $key, TypeGenerator $value): ArrayType
+    public static function array(Type $key, Type $value): ArrayType
     {
         return ArrayType::new($key, $value);
     }
@@ -73,12 +73,12 @@ final class TG
      * @template V
      * @template W
      *
-     * @param TypeGenerator<V> $t1
-     * @param TypeGenerator<W> $t2
+     * @param Type<V> $t1
+     * @param Type<W> $t2
      *
      * @return Compound<V, W>
      */
-    public static function compound(TypeGenerator $t1, TypeGenerator $t2): Compound
+    public static function compound(Type $t1, Type $t2): Compound
     {
         return Compound::new($t1, $t2);
     }
@@ -86,12 +86,12 @@ final class TG
     /**
      * @template V
      *
-     * @param TypeGenerator<V> $type
-     * @param Closure(TypeGenerator<V>): V $generator
+     * @param Type<V> $type
+     * @param Closure(Type<V>): V $generator
      *
      * @return Custom<V>
      */
-    public static function custom(TypeGenerator $type, Closure $generator): Custom
+    public static function custom(Type $type, Closure $generator): Custom
     {
         return Custom::new($type, $generator);
     }
@@ -104,12 +104,12 @@ final class TG
     /**
      * @template V
      *
-     * @param TypeGenerator<V> $type
+     * @param Type<V> $type
      * @param Closure(Generator): V $fakerGenerator
      *
      * @return Faker<V>
      */
-    public static function faker(TypeGenerator $type, Closure $fakerGenerator, ?Generator $faker = null): Faker
+    public static function faker(Type $type, Closure $fakerGenerator, ?Generator $faker = null): Faker
     {
         return Faker::new($type, $fakerGenerator, $faker);
     }
@@ -128,12 +128,12 @@ final class TG
      * @template WKey
      * @template W
      *
-     * @param TypeGenerator<WKey> $key
-     * @param TypeGenerator<W> $value
+     * @param Type<WKey> $key
+     * @param Type<W> $value
      *
      * @return IteratorType<WKey, W>
      */
-    public static function iterator(TypeGenerator $key, TypeGenerator $value): IteratorType
+    public static function iterator(Type $key, Type $value): IteratorType
     {
         return IteratorType::new($key, $value);
     }
@@ -141,11 +141,11 @@ final class TG
     /**
      * @template W
      *
-     * @param TypeGenerator<W> $type
+     * @param Type<W> $type
      *
      * @return ListType<W>
      */
-    public static function list(TypeGenerator $type): ListType
+    public static function list(Type $type): ListType
     {
         return ListType::new($type);
     }
@@ -163,11 +163,11 @@ final class TG
     /**
      * @template W
      *
-     * @param TypeGenerator<W> $type
+     * @param Type<W> $type
      *
      * @return Nullable<W>
      */
-    public static function nullable(TypeGenerator $type): Nullable
+    public static function nullable(Type $type): Nullable
     {
         return Nullable::new($type);
     }
@@ -190,12 +190,12 @@ final class TG
     /**
      * @template W
      *
-     * @param TypeGenerator<W> $type
+     * @param Type<W> $type
      * @param W $value
      *
      * @return StaticType<W>
      */
-    public static function static(TypeGenerator $type, $value): StaticType
+    public static function static(Type $type, $value): StaticType
     {
         return StaticType::new($type, $value);
     }

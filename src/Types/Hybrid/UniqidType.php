@@ -9,19 +9,19 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 use loophp\TypedGenerators\Types\Core\StringType;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 
 /**
- * @extends AbstractTypeGenerator<string>
+ * @extends AbstractType<string>
  */
-final class UniqidType extends AbstractTypeGenerator
+final class UniqidType extends AbstractType
 {
     /**
-     * @var TypeGenerator<string>
+     * @var Type<string>
      */
-    private TypeGenerator $type;
+    private Type $type;
 
     public function __construct(string $prefix = '', bool $moreEntropy = false)
     {

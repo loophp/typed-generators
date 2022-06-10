@@ -9,13 +9,13 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 use TypeError;
 
 /**
- * @extends AbstractTypeGenerator<null>
+ * @extends AbstractType<null>
  */
-final class NullType extends AbstractTypeGenerator
+final class NullType extends AbstractType
 {
     public function __invoke()
     {

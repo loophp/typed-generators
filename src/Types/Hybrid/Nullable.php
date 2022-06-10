@@ -9,28 +9,28 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\NullType;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 
 /**
  * @template T
  *
- * @extends AbstractTypeGenerator<T|null>
+ * @extends AbstractType<T|null>
  */
-final class Nullable extends AbstractTypeGenerator
+final class Nullable extends AbstractType
 {
     /**
-     * @var TypeGenerator<T>
+     * @var Type<T>
      */
-    private TypeGenerator $type;
+    private Type $type;
 
     /**
-     * @param TypeGenerator<T> $type
+     * @param Type<T> $type
      */
     public function __construct(
-        TypeGenerator $type
+        Type $type
     ) {
         $this->type = $type;
     }
@@ -56,11 +56,11 @@ final class Nullable extends AbstractTypeGenerator
     /**
      * @template V
      *
-     * @param TypeGenerator<V> $type
+     * @param Type<V> $type
      *
      * @return Nullable<V>
      */
-    public static function new(TypeGenerator $type): self
+    public static function new(Type $type): self
     {
         return new self($type);
     }

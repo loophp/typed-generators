@@ -9,12 +9,12 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 
 /**
- * @extends AbstractTypeGenerator<float>
+ * @extends AbstractType<float>
  */
-final class FloatType extends AbstractTypeGenerator
+final class FloatType extends AbstractType
 {
     public function __invoke(): float
     {

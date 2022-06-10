@@ -10,12 +10,12 @@ declare(strict_types=1);
 namespace loophp\TypedGenerators\Types\Core;
 
 use Closure;
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 
 /**
- * @extends AbstractTypeGenerator<Closure>
+ * @extends AbstractType<Closure>
  */
-final class ClosureType extends AbstractTypeGenerator
+final class ClosureType extends AbstractType
 {
     public function __invoke()
     {

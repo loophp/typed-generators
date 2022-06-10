@@ -10,32 +10,32 @@ declare(strict_types=1);
 namespace loophp\TypedGenerators\Types\Core;
 
 use Iterator;
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
+use loophp\TypedGenerators\Types\Type;
 
 /**
  * @template TKey
  * @template T
  *
- * @extends AbstractTypeGenerator<Iterator<TKey, T>>
+ * @extends AbstractType<Iterator<TKey, T>>
  */
-final class IteratorType extends AbstractTypeGenerator
+final class IteratorType extends AbstractType
 {
     /**
-     * @var list<TypeGenerator<TKey>>
+     * @var list<Type<TKey>>
      */
     private array $keys = [];
 
     /**
-     * @var list<TypeGenerator<T>>
+     * @var list<Type<T>>
      */
     private array $values = [];
 
     /**
-     * @param TypeGenerator<TKey> $key
-     * @param TypeGenerator<T> $value
+     * @param Type<TKey> $key
+     * @param Type<T> $value
      */
-    public function __construct(TypeGenerator $key, TypeGenerator $value)
+    public function __construct(Type $key, Type $value)
     {
         $this->keys[] = $key;
         $this->values[] = $value;
@@ -55,12 +55,12 @@ final class IteratorType extends AbstractTypeGenerator
      * @template VKey of array-key
      * @template V
      *
-     * @param TypeGenerator<VKey> $key
-     * @param TypeGenerator<V> $value
+     * @param Type<VKey> $key
+     * @param Type<V> $value
      *
      * @return IteratorType<TKey|VKey, T|V>
      */
-    public function add(TypeGenerator $key, TypeGenerator $value): IteratorType
+    public function add(Type $key, Type $value): IteratorType
     {
         // @TODO: See if we can fix this issue in PHPStan/PSalm.
         // There should not be @var annotation here.
@@ -68,11 +68,11 @@ final class IteratorType extends AbstractTypeGenerator
         /** @var IteratorType<TKey|VKey, T|V> $clone */
         $clone = clone $this;
 
-        /** @var list<TypeGenerator<TKey|VKey>> $keys */
+        /** @var list<Type<TKey|VKey>> $keys */
         $keys = array_merge($this->keys, [$key]);
         $clone->keys = $keys;
 
-        /** @var list<TypeGenerator<T|V>> $values */
+        /** @var list<Type<T|V>> $values */
         $values = array_merge($this->values, [$value]);
         $clone->values = $values;
 
@@ -93,12 +93,12 @@ final class IteratorType extends AbstractTypeGenerator
      * @template WKey
      * @template W
      *
-     * @param TypeGenerator<WKey> $key
-     * @param TypeGenerator<W> $value
+     * @param Type<WKey> $key
+     * @param Type<W> $value
      *
      * @return IteratorType<WKey, W>
      */
-    public static function new(TypeGenerator $key, TypeGenerator $value): self
+    public static function new(Type $key, Type $value): self
     {
         return new self($key, $value);
     }

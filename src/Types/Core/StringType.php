@@ -9,14 +9,14 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 
 use function chr;
 
 /**
- * @extends AbstractTypeGenerator<string>
+ * @extends AbstractType<string>
  */
-final class StringType extends AbstractTypeGenerator
+final class StringType extends AbstractType
 {
     private int $length;
 

@@ -9,12 +9,12 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 
 /**
- * @extends AbstractTypeGenerator<bool>
+ * @extends AbstractType<bool>
  */
-final class BoolType extends AbstractTypeGenerator
+final class BoolType extends AbstractType
 {
     public function __invoke(): bool
     {

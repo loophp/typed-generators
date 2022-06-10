@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
+use loophp\TypedGenerators\Types\Type;
 
 use function array_key_exists;
 use function count;
@@ -19,25 +19,25 @@ use function count;
  * @template TKey of array-key
  * @template T
  *
- * @extends AbstractTypeGenerator<array<TKey, T>>
+ * @extends AbstractType<array<TKey, T>>
  */
-final class ArrayType extends AbstractTypeGenerator
+final class ArrayType extends AbstractType
 {
     /**
-     * @var list<TypeGenerator<TKey>>
+     * @var list<Type<TKey>>
      */
     private array $keys = [];
 
     /**
-     * @var list<TypeGenerator<T>>
+     * @var list<Type<T>>
      */
     private array $values = [];
 
     /**
-     * @param TypeGenerator<TKey> $key
-     * @param TypeGenerator<T> $value
+     * @param Type<TKey> $key
+     * @param Type<T> $value
      */
-    public function __construct(TypeGenerator $key, TypeGenerator $value)
+    public function __construct(Type $key, Type $value)
     {
         $this->keys[] = $key;
         $this->values[] = $value;
@@ -74,12 +74,12 @@ final class ArrayType extends AbstractTypeGenerator
      * @template VKey of array-key
      * @template V
      *
-     * @param TypeGenerator<VKey> $key
-     * @param TypeGenerator<V> $value
+     * @param Type<VKey> $key
+     * @param Type<V> $value
      *
      * @return ArrayType<TKey|VKey, T|V>
      */
-    public function add(TypeGenerator $key, TypeGenerator $value): ArrayType
+    public function add(Type $key, Type $value): ArrayType
     {
         // @TODO: See if we can fix this issue in PHPStan/PSalm.
         // There should not be @var annotation here.
@@ -87,11 +87,11 @@ final class ArrayType extends AbstractTypeGenerator
         /** @var ArrayType<TKey|VKey, T|V> $clone */
         $clone = clone $this;
 
-        /** @var list<TypeGenerator<TKey|VKey>> $keys */
+        /** @var list<Type<TKey|VKey>> $keys */
         $keys = array_merge($this->keys, [$key]);
         $clone->keys = $keys;
 
-        /** @var list<TypeGenerator<T|V>> $values */
+        /** @var list<Type<T|V>> $values */
         $values = array_merge($this->values, [$value]);
         $clone->values = $values;
 
@@ -112,12 +112,12 @@ final class ArrayType extends AbstractTypeGenerator
      * @template WKey of array-key
      * @template W
      *
-     * @param TypeGenerator<WKey> $key
-     * @param TypeGenerator<W> $value
+     * @param Type<WKey> $key
+     * @param Type<W> $value
      *
      * @return ArrayType<WKey, W>
      */
-    public static function new(TypeGenerator $key, TypeGenerator $value): self
+    public static function new(Type $key, Type $value): self
     {
         return new self($key, $value);
     }

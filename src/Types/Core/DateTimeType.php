@@ -11,12 +11,12 @@ namespace loophp\TypedGenerators\Types\Core;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 
 /**
- * @extends AbstractTypeGenerator<DateTimeInterface>
+ * @extends AbstractType<DateTimeInterface>
  */
-final class DateTimeType extends AbstractTypeGenerator
+final class DateTimeType extends AbstractType
 {
     private DateTimeInterface $end;
 

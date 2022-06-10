@@ -12,15 +12,15 @@ namespace loophp\TypedGenerators\Types\Hybrid;
 use Closure;
 use Faker\Factory;
 use Faker\Generator;
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
+use loophp\TypedGenerators\Types\Type;
 
 /**
  * @template T
  *
- * @extends AbstractTypeGenerator<T>
+ * @extends AbstractType<T>
  */
-final class Faker extends AbstractTypeGenerator
+final class Faker extends AbstractType
 {
     private Generator $faker;
 
@@ -30,15 +30,15 @@ final class Faker extends AbstractTypeGenerator
     private Closure $fakerGenerator;
 
     /**
-     * @var TypeGenerator<T>
+     * @var Type<T>
      */
-    private TypeGenerator $type;
+    private Type $type;
 
     /**
-     * @param TypeGenerator<T> $t
+     * @param Type<T> $t
      * @param Closure(Generator): T $fakerGenerator
      */
-    public function __construct(TypeGenerator $t, Closure $fakerGenerator, ?Generator $faker = null)
+    public function __construct(Type $t, Closure $fakerGenerator, ?Generator $faker = null)
     {
         $this->type = $t;
         $this->fakerGenerator = $fakerGenerator;
@@ -66,12 +66,12 @@ final class Faker extends AbstractTypeGenerator
     /**
      * @template V
      *
-     * @param TypeGenerator<V> $type
+     * @param Type<V> $type
      * @param Closure(Generator): V $fakerGenerator
      *
      * @return Faker<V>
      */
-    public static function new(TypeGenerator $type, Closure $fakerGenerator, ?Generator $faker = null): self
+    public static function new(Type $type, Closure $fakerGenerator, ?Generator $faker = null): self
     {
         return new self($type, $fakerGenerator, $faker);
     }

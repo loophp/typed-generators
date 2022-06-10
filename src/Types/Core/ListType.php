@@ -9,25 +9,25 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
+use loophp\TypedGenerators\Types\Type;
 
 /**
  * @template T
  *
- * @extends AbstractTypeGenerator<list<T>>
+ * @extends AbstractType<list<T>>
  */
-final class ListType extends AbstractTypeGenerator
+final class ListType extends AbstractType
 {
     /**
-     * @var list<TypeGenerator<T>>
+     * @var list<Type<T>>
      */
     private array $values = [];
 
     /**
-     * @param TypeGenerator<T> $v
+     * @param Type<T> $v
      */
-    public function __construct(TypeGenerator $v)
+    public function __construct(Type $v)
     {
         $this->values[] = $v;
     }
@@ -39,11 +39,11 @@ final class ListType extends AbstractTypeGenerator
     {
         return array_map(
             /**
-             * @param TypeGenerator<T> $type
+             * @param Type<T> $type
              *
              * @return T
              */
-            static fn (TypeGenerator $type) => $type(),
+            static fn (Type $type) => $type(),
             $this->values
         );
     }
@@ -51,11 +51,11 @@ final class ListType extends AbstractTypeGenerator
     /**
      * @template V
      *
-     * @param TypeGenerator<V> $type
+     * @param Type<V> $type
      *
      * @return ListType<T|V>
      */
-    public function add(TypeGenerator $type): self
+    public function add(Type $type): self
     {
         // @TODO: See if we can fix this issue in PHPStan/PSalm.
         // There should not be @var annotation here.
@@ -63,7 +63,7 @@ final class ListType extends AbstractTypeGenerator
         /** @var ListType<T|V> $clone */
         $clone = clone $this;
 
-        /** @var list<TypeGenerator<T|V>> $values */
+        /** @var list<Type<T|V>> $values */
         $values = array_merge($this->values, [$type]);
         $clone->values = $values;
 
@@ -83,11 +83,11 @@ final class ListType extends AbstractTypeGenerator
     /**
      * @template W
      *
-     * @param TypeGenerator<W> $type
+     * @param Type<W> $type
      *
      * @return ListType<W>
      */
-    public static function new(TypeGenerator $type): self
+    public static function new(Type $type): self
     {
         return new self($type);
     }

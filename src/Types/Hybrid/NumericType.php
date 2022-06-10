@@ -9,20 +9,20 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 use loophp\TypedGenerators\Types\Core\FloatType;
 use loophp\TypedGenerators\Types\Core\IntType;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 
 /**
- * @extends AbstractTypeGenerator<int|float>
+ * @extends AbstractType<int|float>
  */
-final class NumericType extends AbstractTypeGenerator
+final class NumericType extends AbstractType
 {
     /**
      * @var Compound<int, float>
      */
-    private TypeGenerator $type;
+    private Type $type;
 
     public function __construct()
     {

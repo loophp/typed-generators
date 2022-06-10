@@ -21,7 +21,7 @@ use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -53,7 +53,7 @@ final class ListTest extends TestCase
     /**
      * @dataProvider typeProvider
      */
-    public function testKeyValue(TypeGenerator $t1)
+    public function testKeyValue(Type $t1)
     {
         $subject = ListType::new($t1);
 

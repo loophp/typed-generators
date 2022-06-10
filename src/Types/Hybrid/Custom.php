@@ -10,31 +10,31 @@ declare(strict_types=1);
 namespace loophp\TypedGenerators\Types\Hybrid;
 
 use Closure;
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
+use loophp\TypedGenerators\Types\Type;
 
 /**
  * @template T
  *
- * @extends AbstractTypeGenerator<T>
+ * @extends AbstractType<T>
  */
-final class Custom extends AbstractTypeGenerator
+final class Custom extends AbstractType
 {
     /**
-     * @var Closure(TypeGenerator<T>): T
+     * @var Closure(Type<T>): T
      */
     private Closure $generator;
 
     /**
-     * @var TypeGenerator<T>
+     * @var Type<T>
      */
-    private TypeGenerator $type;
+    private Type $type;
 
     /**
-     * @param TypeGenerator<T> $type
-     * @param Closure(TypeGenerator<T>): T $generator
+     * @param Type<T> $type
+     * @param Closure(Type<T>): T $generator
      */
-    public function __construct(TypeGenerator $type, Closure $generator)
+    public function __construct(Type $type, Closure $generator)
     {
         $this->type = $type;
         $this->generator = $generator;
@@ -61,12 +61,12 @@ final class Custom extends AbstractTypeGenerator
     /**
      * @template V
      *
-     * @param TypeGenerator<V> $type
-     * @param Closure(TypeGenerator<V>): V $generator
+     * @param Type<V> $type
+     * @param Closure(Type<V>): V $generator
      *
      * @return Custom<V>
      */
-    public static function new(TypeGenerator $type, Closure $generator): self
+    public static function new(Type $type, Closure $generator): self
     {
         return new self($type, $generator);
     }

@@ -9,15 +9,15 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Core;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 
 use const PHP_INT_MAX;
 use const PHP_INT_MIN;
 
 /**
- * @extends AbstractTypeGenerator<int>
+ * @extends AbstractType<int>
  */
-final class IntType extends AbstractTypeGenerator
+final class IntType extends AbstractType
 {
     private int $max;
 

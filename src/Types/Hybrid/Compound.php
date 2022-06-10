@@ -9,35 +9,35 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 use loophp\TypedGenerators\Types\Core\BoolType;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 
 /**
  * @template T
  * @template U
  *
- * @extends AbstractTypeGenerator<T|U>
+ * @extends AbstractType<T|U>
  */
-final class Compound extends AbstractTypeGenerator
+final class Compound extends AbstractType
 {
     /**
-     * @var TypeGenerator<T>
+     * @var Type<T>
      */
-    private TypeGenerator $t1;
+    private Type $t1;
 
     /**
-     * @var TypeGenerator<U>
+     * @var Type<U>
      */
-    private TypeGenerator $t2;
+    private Type $t2;
 
     /**
-     * @param TypeGenerator<T> $t1
-     * @param TypeGenerator<U> $t2
+     * @param Type<T> $t1
+     * @param Type<U> $t2
      */
     public function __construct(
-        TypeGenerator $t1,
-        TypeGenerator $t2
+        Type $t1,
+        Type $t2
     ) {
         $this->t1 = $t1;
         $this->t2 = $t2;
@@ -65,12 +65,12 @@ final class Compound extends AbstractTypeGenerator
      * @template V
      * @template W
      *
-     * @param TypeGenerator<V> $t1
-     * @param TypeGenerator<W> $t2
+     * @param Type<V> $t1
+     * @param Type<W> $t2
      *
      * @return Compound<V, W>
      */
-    public static function new(TypeGenerator $t1, TypeGenerator $t2): self
+    public static function new(Type $t1, Type $t2): self
     {
         return new self($t1, $t2);
     }

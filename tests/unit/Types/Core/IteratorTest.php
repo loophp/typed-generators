@@ -23,7 +23,7 @@ use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\Nullable;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -55,7 +55,7 @@ final class IteratorTest extends TestCase
     /**
      * @dataProvider typeProvider
      */
-    public function testKeyValue(TypeGenerator $t1, TypeGenerator $t2)
+    public function testKeyValue(Type $t1, Type $t2)
     {
         $subject = IteratorType::new($t1, $t2);
 

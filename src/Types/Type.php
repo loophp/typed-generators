@@ -17,7 +17,7 @@ use IteratorAggregate;
  *
  * @extends IteratorAggregate<int, T>
  */
-interface TypeGenerator extends IteratorAggregate
+interface Type extends IteratorAggregate
 {
     /**
      * @return T

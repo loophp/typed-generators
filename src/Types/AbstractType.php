@@ -14,9 +14,9 @@ use Iterator;
 /**
  * @template T
  *
- * @implements TypeGenerator<T>
+ * @implements Type<T>
  */
-abstract class AbstractTypeGenerator implements TypeGenerator
+abstract class AbstractType implements Type
 {
     /**
      * @return Iterator<int, T>

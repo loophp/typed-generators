@@ -9,21 +9,21 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
 use loophp\TypedGenerators\Types\Core\IntType;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\Type;
 
 use const PHP_INT_MAX;
 
 /**
- * @extends AbstractTypeGenerator<int>
+ * @extends AbstractType<int>
  */
-final class PositiveIntType extends AbstractTypeGenerator
+final class PositiveIntType extends AbstractType
 {
     /**
-     * @var TypeGenerator<int>
+     * @var Type<int>
      */
-    private TypeGenerator $type;
+    private Type $type;
 
     public function __construct(int $max = PHP_INT_MAX)
     {

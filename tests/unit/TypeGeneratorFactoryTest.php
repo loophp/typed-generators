@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace tests\loophp\TypedGenerators;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TG;
+use loophp\TypedGenerators\TypeGeneratorFactory as TG;
 use loophp\TypedGenerators\Types\Core\ArrayType;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\ClosureType;
@@ -38,7 +38,7 @@ use PHPUnit\Framework\TestCase;
  * @internal
  * @coversDefaultClass \loophp\TypedGenerators
  */
-final class TGTest extends TestCase
+final class TypeGeneratorFactoryTest extends TestCase
 {
     /**
      * @dataProvider typeProvider

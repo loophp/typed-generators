@@ -41,7 +41,7 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\TG;
+use loophp\TypedGenerators\TypeGeneratorFactory as TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -79,7 +79,7 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\TG;
+use loophp\TypedGenerators\TypeGeneratorFactory as TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -106,7 +106,7 @@ declare(strict_types=1);
 
 namespace Snippet;
 
-use loophp\TypedGenerators\TG;
+use loophp\TypedGenerators\TypeGeneratorFactory as TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -134,7 +134,7 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TG;
+use loophp\TypedGenerators\TypeGeneratorFactory as TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -169,7 +169,7 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TG;
+use loophp\TypedGenerators\TypeGeneratorFactory as TG;
 
 include __DIR__ . '/vendor/autoload.php';
 
@@ -205,7 +205,7 @@ declare(strict_types=1);
 namespace Snippet;
 
 use Faker\Generator;
-use loophp\TypedGenerators\TG;
+use loophp\TypedGenerators\TypeGeneratorFactory as TG;
 
 include __DIR__ . '/vendor/autoload.php';
 

@@ -9,18 +9,18 @@ declare(strict_types=1);
 
 namespace loophp\TypedGenerators\Types\Hybrid;
 
-use loophp\TypedGenerators\Types\AbstractTypeGenerator;
-use loophp\TypedGenerators\Types\TypeGenerator;
+use loophp\TypedGenerators\Types\AbstractType;
+use loophp\TypedGenerators\Types\Type;
 
 /**
- * @extends AbstractTypeGenerator<string|int>
+ * @extends AbstractType<string|int>
  */
-final class ArrayKeyType extends AbstractTypeGenerator
+final class ArrayKeyType extends AbstractType
 {
     /**
-     * @var TypeGenerator<array-key>
+     * @var Type<array-key>
      */
-    private TypeGenerator $type;
+    private Type $type;
 
     public function __construct()
     {
