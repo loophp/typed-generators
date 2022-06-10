@@ -27,7 +27,8 @@
         }
     ],
     "require": {
-        "php": ">= 7.4"
+        "php": ">= 7.4",
+        "loophp/collection": "^6.0"
     },
     "require-dev": {
         "drupol/php-conventions": "^5",
