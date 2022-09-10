@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \loophp\TypedGenerators
  */
 final class NullableTest extends TestCase

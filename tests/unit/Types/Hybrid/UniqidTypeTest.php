@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \loophp\TypedGenerators
  */
 final class UniqidTypeTest extends TestCase

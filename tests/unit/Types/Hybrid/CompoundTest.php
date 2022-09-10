@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \loophp\TypedGenerators
  */
 final class CompoundTest extends TestCase

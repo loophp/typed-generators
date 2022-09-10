@@ -30,6 +30,7 @@
         "php": ">= 7.4"
     },
     "require-dev": {
+        "ext-pcov": "*",
         "drupol/php-conventions": "^5",
         "fakerphp/faker": "^1.19",
         "infection/infection": "^0.26",
@@ -67,8 +68,8 @@
         }
     },
     "scripts": {
-        "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
-        "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
+        "changelog-unreleased": "auto-changelog -c .auto-changelog -u",
+        "changelog-version": "auto-changelog -c .auto-changelog -v",
         "grumphp": "./vendor/bin/grumphp run",
         "infection": "vendor/bin/infection run -j 2"
     }

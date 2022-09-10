@@ -12,11 +12,13 @@ namespace tests\loophp\TypedGenerators\Types\Core;
 use LimitIterator;
 use loophp\TypedGenerators\Types\Core\StringType;
 use PHPUnit\Framework\TestCase;
+
 use function ord;
 use function strlen;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \loophp\TypedGenerators
  */
 final class StringTypeTest extends TestCase

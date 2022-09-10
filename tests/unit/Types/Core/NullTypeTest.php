@@ -16,6 +16,7 @@ use TypeError;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \loophp\TypedGenerators
  */
 final class NullTypeTest extends TestCase

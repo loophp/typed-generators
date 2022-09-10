@@ -36,6 +36,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \loophp\TypedGenerators
  */
 final class TypeGeneratorFactoryTest extends TestCase
