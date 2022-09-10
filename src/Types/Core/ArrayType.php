@@ -48,9 +48,10 @@ final class ArrayType extends AbstractType
      */
     public function __invoke(): array
     {
-        $keys = $values = [];
+        $keys = [];
         $countKeys = count($this->keys);
 
+        // TODO: What is doing this thing??
         for ($i = 0; count($keys) < $countKeys; ++$i) {
             $key = ($this->keys[$i])();
 
@@ -63,11 +64,18 @@ final class ArrayType extends AbstractType
             $keys[$key] = $key;
         }
 
-        foreach ($this->values as $value) {
-            $values[] = ($value)();
-        }
-
-        return array_combine($keys, $values);
+        return array_combine(
+            $keys,
+            array_map(
+                /**
+                 * @param Type<T> $value
+                 *
+                 * @return T
+                 */
+                static fn (Type $value) => $value(),
+                $this->values
+            )
+        );
     }
 
     /**
