@@ -24,7 +24,7 @@ final class ArrayKeyType extends AbstractType
 
     public function __construct()
     {
-        $this->type = Compound::new(PositiveIntType::new(), UniqidType::new());
+        $this->type = Union::new(PositiveIntType::new(), UniqidType::new());
     }
 
     /**

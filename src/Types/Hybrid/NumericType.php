@@ -20,13 +20,13 @@ use loophp\TypedGenerators\Types\Type;
 final class NumericType extends AbstractType
 {
     /**
-     * @var Compound<int, float>
+     * @var Union<int, float>
      */
     private Type $type;
 
     public function __construct()
     {
-        $this->type = Compound::new(IntType::new(), FloatType::new());
+        $this->type = Union::new(IntType::new(), FloatType::new());
     }
 
     /**

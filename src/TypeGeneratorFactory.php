@@ -24,7 +24,6 @@ use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\ArrayKeyType;
-use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\NegativeIntType;
@@ -32,6 +31,7 @@ use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use loophp\TypedGenerators\Types\Hybrid\NumericType;
 use loophp\TypedGenerators\Types\Hybrid\PositiveIntType;
 use loophp\TypedGenerators\Types\Hybrid\StaticType;
+use loophp\TypedGenerators\Types\Hybrid\Union;
 use loophp\TypedGenerators\Types\Hybrid\UniqidType;
 use loophp\TypedGenerators\Types\Type;
 
@@ -67,20 +67,6 @@ final class TypeGeneratorFactory
     public static function closure(): ClosureType
     {
         return ClosureType::new();
-    }
-
-    /**
-     * @template V
-     * @template W
-     *
-     * @param Type<V> $t1
-     * @param Type<W> $t2
-     *
-     * @return Compound<V, W>
-     */
-    public static function compound(Type $t1, Type $t2): Compound
-    {
-        return Compound::new($t1, $t2);
     }
 
     /**
@@ -203,6 +189,20 @@ final class TypeGeneratorFactory
     public static function string(int $length = 1): StringType
     {
         return StringType::new($length);
+    }
+
+    /**
+     * @template V
+     * @template W
+     *
+     * @param Type<V> $t1
+     * @param Type<W> $t2
+     *
+     * @return Union<V, W>
+     */
+    public static function Union(Type $t1, Type $t2): Union
+    {
+        return Union::new($t1, $t2);
     }
 
     public static function uniqid(string $prefix = '', bool $moreEntropy = false): UniqidType

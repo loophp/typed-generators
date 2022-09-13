@@ -23,7 +23,6 @@ use loophp\TypedGenerators\Types\Core\NullType;
 use loophp\TypedGenerators\Types\Core\ObjectType;
 use loophp\TypedGenerators\Types\Core\StringType;
 use loophp\TypedGenerators\Types\Hybrid\ArrayKeyType;
-use loophp\TypedGenerators\Types\Hybrid\Compound;
 use loophp\TypedGenerators\Types\Hybrid\Custom;
 use loophp\TypedGenerators\Types\Hybrid\Faker;
 use loophp\TypedGenerators\Types\Hybrid\NegativeIntType;
@@ -31,6 +30,7 @@ use loophp\TypedGenerators\Types\Hybrid\Nullable;
 use loophp\TypedGenerators\Types\Hybrid\NumericType;
 use loophp\TypedGenerators\Types\Hybrid\PositiveIntType;
 use loophp\TypedGenerators\Types\Hybrid\StaticType;
+use loophp\TypedGenerators\Types\Hybrid\Union;
 use loophp\TypedGenerators\Types\Hybrid\UniqidType;
 use PHPUnit\Framework\TestCase;
 
@@ -79,12 +79,12 @@ final class TypeGeneratorFactoryTest extends TestCase
         ];
 
         yield [
-            'method' => 'compound',
+            'method' => 'union',
             'arguments' => [
                 new StringType(),
                 new IntType(),
             ],
-            'class' => Compound::class,
+            'class' => Union::class,
         ];
 
         yield [

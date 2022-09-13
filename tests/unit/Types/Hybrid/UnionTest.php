@@ -12,7 +12,7 @@ namespace tests\loophp\TypedGenerators\Types\Hybrid;
 use LimitIterator;
 use loophp\TypedGenerators\Types\Core\BoolType;
 use loophp\TypedGenerators\Types\Core\StringType;
-use loophp\TypedGenerators\Types\Hybrid\Compound;
+use loophp\TypedGenerators\Types\Hybrid\Union;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,18 +20,18 @@ use PHPUnit\Framework\TestCase;
  *
  * @coversDefaultClass \loophp\TypedGenerators
  */
-final class CompoundTest extends TestCase
+final class UnionTest extends TestCase
 {
     public function testConstructor()
     {
-        $subject = new Compound(new BoolType(), new BoolType());
+        $subject = new Union(new BoolType(), new BoolType());
 
         self::assertIsBool($subject());
     }
 
     public function testGetIterator()
     {
-        $subject = new Compound(new BoolType(), new BoolType());
+        $subject = new Union(new BoolType(), new BoolType());
 
         self::assertInstanceOf('Iterator', $subject->getIterator());
 
@@ -42,7 +42,7 @@ final class CompoundTest extends TestCase
 
     public function testIdentity()
     {
-        $subject = new Compound(new StringType(), new BoolType());
+        $subject = new Union(new StringType(), new BoolType());
 
         $string = 'Hello';
         $bool = true;

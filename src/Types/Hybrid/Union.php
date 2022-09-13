@@ -19,7 +19,7 @@ use loophp\TypedGenerators\Types\Type;
  *
  * @extends AbstractType<T|U>
  */
-final class Compound extends AbstractType
+final class Union extends AbstractType
 {
     /**
      * @var Type<T>
@@ -68,7 +68,7 @@ final class Compound extends AbstractType
      * @param Type<V> $t1
      * @param Type<W> $t2
      *
-     * @return Compound<V, W>
+     * @return Union<V, W>
      */
     public static function new(Type $t1, Type $t2): self
     {

@@ -49,7 +49,7 @@ $arrays    = TG::array(TG::string(), TG::string());
 $arrayKeys = TG::arrayKey();
 $booleans  = TG::bool();
 $closures  = TG::closure();
-$compounds = TG::compound(TG::bool(), TG::int());
+$unions    = TG::union(TG::bool(), TG::int());
 $customs   = TG::custom(TG::string(), static fn (): string => 'bar');
 $datetimes = TG::datetime();
 $faker     = TG::faker(TG::string(), static fn (Faker\Generator $faker): string => $faker->city());
@@ -155,9 +155,9 @@ foreach ($iterator() as $key => $value) {
 
 </details>
 
-### Use random compound values
+### Use random union values
 
-Compound values are values that can be either of type `A` or type `B`.
+Union values are values that can be either of type `A` or type `B`.
 
 <details>
 
@@ -180,7 +180,7 @@ $fakerType = TG::faker(
 
 $iterator = TG::iterator(
     TG::bool(),    // Keys: A random boolean
-    TG::compound(  // Values: A random compound value which can be
+    TG::union(  // Values: A random union value which can be
         $fakerType,// either a firstname
         TG::int()  // either an integer.
     )
