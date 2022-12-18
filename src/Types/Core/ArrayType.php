@@ -96,11 +96,11 @@ final class ArrayType extends AbstractType
         $clone = clone $this;
 
         /** @var list<Type<TKey|VKey>> $keys */
-        $keys = array_merge($this->keys, [$key]);
+        $keys = [...$this->keys, ...[$key]];
         $clone->keys = $keys;
 
         /** @var list<Type<T|V>> $values */
-        $values = array_merge($this->values, [$value]);
+        $values = [...$this->values, ...[$value]];
         $clone->values = $values;
 
         return $clone;

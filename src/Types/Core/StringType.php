@@ -18,23 +18,15 @@ use function chr;
  */
 final class StringType extends AbstractType
 {
-    private int $length;
-
-    private string $prefix;
-
-    public function __construct(int $length = 1, string $prefix = '')
+    public function __construct(private int $length = 1, private string $prefix = '')
     {
-        $this->length = $length;
-        $this->prefix = $prefix;
     }
 
     public function __invoke(): string
     {
         return array_reduce(
             range(1, $this->length),
-            static function (string $start): string {
-                return $start . chr(random_int(33, 126));
-            },
+            static fn(string $start): string => $start . chr(random_int(33, 126)),
             $this->prefix
         );
     }

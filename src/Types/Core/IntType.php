@@ -19,14 +19,8 @@ use const PHP_INT_MIN;
  */
 final class IntType extends AbstractType
 {
-    private int $max;
-
-    private int $min;
-
-    public function __construct(int $min = PHP_INT_MIN, int $max = PHP_INT_MAX)
+    public function __construct(private int $min = PHP_INT_MIN, private int $max = PHP_INT_MAX)
     {
-        $this->min = $min;
-        $this->max = $max;
     }
 
     public function __invoke(): int

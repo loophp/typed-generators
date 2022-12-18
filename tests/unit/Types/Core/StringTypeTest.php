@@ -63,11 +63,8 @@ final class StringTypeTest extends TestCase
 
     /**
      * @dataProvider stringTypeProvider
-     *
-     * @param mixed $length
-     * @param mixed $prefix
      */
-    public function testConstructor($length, $prefix)
+    public function testConstructor(mixed $length, mixed $prefix)
     {
         if ($length === $prefix) {
             $stringType = StringType::new()();

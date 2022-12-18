@@ -18,7 +18,7 @@ final class FloatType extends AbstractType
 {
     public function __invoke(): float
     {
-        return (float) (BoolType::new()() ? -1 : 1) * (mt_rand() / mt_getrandmax());
+        return (float) (BoolType::new()() ? -1 : 1) * (random_int(0, mt_getrandmax()) / mt_getrandmax());
     }
 
     /**

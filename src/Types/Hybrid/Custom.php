@@ -26,17 +26,11 @@ final class Custom extends AbstractType
     private Closure $generator;
 
     /**
-     * @var Type<T>
-     */
-    private Type $type;
-
-    /**
      * @param Type<T> $type
      * @param Closure(Type<T>): T $generator
      */
-    public function __construct(Type $type, Closure $generator)
+    public function __construct(private Type $type, Closure $generator)
     {
-        $this->type = $type;
         $this->generator = $generator;
     }
 

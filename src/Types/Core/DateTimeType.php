@@ -24,7 +24,7 @@ final class DateTimeType extends AbstractType
 
     public function __construct(?DateTimeInterface $start = null, ?DateTimeInterface $end = null)
     {
-        $this->start = $start ?? new DateTimeImmutable(date('Y-m-d', mt_rand(1, time())));
+        $this->start = $start ?? new DateTimeImmutable(date('Y-m-d', random_int(1, time())));
         $this->end = $end ?? new DateTimeImmutable();
     }
 
@@ -34,7 +34,7 @@ final class DateTimeType extends AbstractType
 
         return $randomDate
             ->setTimestamp(
-                mt_rand(
+                random_int(
                     $this->start->getTimestamp(),
                     $this->end->getTimestamp()
                 )

@@ -64,7 +64,7 @@ final class ListType extends AbstractType
         $clone = clone $this;
 
         /** @var list<Type<T|V>> $values */
-        $values = array_merge($this->values, [$type]);
+        $values = [...$this->values, ...[$type]];
         $clone->values = $values;
 
         return $clone;

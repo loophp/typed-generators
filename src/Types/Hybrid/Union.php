@@ -22,25 +22,11 @@ use loophp\TypedGenerators\Types\Type;
 final class Union extends AbstractType
 {
     /**
-     * @var Type<T>
-     */
-    private Type $t1;
-
-    /**
-     * @var Type<U>
-     */
-    private Type $t2;
-
-    /**
      * @param Type<T> $t1
      * @param Type<U> $t2
      */
-    public function __construct(
-        Type $t1,
-        Type $t2
-    ) {
-        $this->t1 = $t1;
-        $this->t2 = $t2;
+    public function __construct(private Type $t1, private Type $t2)
+    {
     }
 
     /**

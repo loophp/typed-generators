@@ -22,17 +22,10 @@ use loophp\TypedGenerators\Types\Type;
 final class Nullable extends AbstractType
 {
     /**
-     * @var Type<T>
-     */
-    private Type $type;
-
-    /**
      * @param Type<T> $type
      */
-    public function __construct(
-        Type $type
-    ) {
-        $this->type = $type;
+    public function __construct(private Type $type)
+    {
     }
 
     /**

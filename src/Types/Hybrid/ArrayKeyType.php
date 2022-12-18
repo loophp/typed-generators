@@ -37,10 +37,8 @@ final class ArrayKeyType extends AbstractType
 
     /**
      * @param string|int $input
-     *
-     * @return string|int
      */
-    public function identity($input)
+    public function identity($input): string|int
     {
         return $this->type->identity($input);
     }

@@ -24,9 +24,7 @@ function foobar(iterable $iterable): iterable
 
 $fakerType = Faker::new(
     StringType::new(),
-    static function (Generator $faker): string {
-        return $faker->city();
-    }
+    static fn(Generator $faker): string => $faker->city()
 );
 
 foobar(IteratorType::new(StringType::new(), $fakerType)());

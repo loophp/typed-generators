@@ -30,17 +30,11 @@ final class Faker extends AbstractType
     private Closure $fakerGenerator;
 
     /**
-     * @var Type<T>
-     */
-    private Type $type;
-
-    /**
-     * @param Type<T> $t
+     * @param Type<T> $type
      * @param Closure(Generator): T $fakerGenerator
      */
-    public function __construct(Type $t, Closure $fakerGenerator, ?Generator $faker = null)
+    public function __construct(private Type $type, Closure $fakerGenerator, ?Generator $faker = null)
     {
-        $this->type = $t;
         $this->fakerGenerator = $fakerGenerator;
         $this->faker = $faker ?? Factory::create();
     }

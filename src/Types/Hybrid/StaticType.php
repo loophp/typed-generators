@@ -20,23 +20,11 @@ use loophp\TypedGenerators\Types\Type;
 final class StaticType extends AbstractType
 {
     /**
-     * @var Type<T>
-     */
-    private Type $type;
-
-    /**
-     * @var T
-     */
-    private $value;
-
-    /**
      * @param Type<T> $type
      * @param T $value
      */
-    public function __construct(Type $type, $value)
+    public function __construct(private Type $type, private $value)
     {
-        $this->type = $type;
-        $this->value = $value;
     }
 
     /**

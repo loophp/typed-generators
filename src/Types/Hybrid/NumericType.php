@@ -39,10 +39,8 @@ final class NumericType extends AbstractType
 
     /**
      * @param int|float $input
-     *
-     * @return int|float
      */
-    public function identity($input)
+    public function identity($input): int|float
     {
         return $this->type->identity($input);
     }
