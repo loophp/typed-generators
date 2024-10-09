@@ -31,7 +31,7 @@
     },
     "require-dev": {
         "ext-pcov": "*",
-        "drupol/php-conventions": "^5",
+        "drupol/php-conventions": "^6",
         "fakerphp/faker": "^1.19",
         "infection/infection": "^0.29",
         "phpbench/phpbench": "^1.2",
